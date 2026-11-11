@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
@@ -130,8 +130,6 @@
             box-sizing: border-box;
         }
 
-        /* Page Specific UI Customizations */
-        
         /* Page 4 & 5 Grid Styles */
         .category-card {
             display: flex;
@@ -282,7 +280,7 @@
             </div>
         </div>
         <!-- Gambar Utama Kedai Bagushi Steamboat & Grill -->
-        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill Logo/Plang" onerror="this.src='https://via.placeholder.com/400x200?text=Bagushi+Steamboat+%26+Grill'">
+        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill Logo/Plang">
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
         <p class="subtitle">Sistem Pesanan Digital & Layanan Pantas</p>
         <button class="btn-primary" onclick="goToPage(2)">Next</button>
@@ -320,7 +318,8 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat" onerror="this.src='https://via.placeholder.com/400x200?text=Bagushi+Steamboat'">
+        <!-- Gambar Kedai Bagushi Steamboat & Grill -->
+        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill">
         <h2 class="title-large">PILIH MEJA</h2>
         <p class="subtitle">Please confirm your table number to view the menu.</p>
         
@@ -592,13 +591,10 @@
 </div>
 
 <script>
-    // Navigation function to switch between pages
     function goToPage(pageNumber) {
-        // Hide all pages
         const pages = document.querySelectorAll('.page');
         pages.forEach(page => page.classList.remove('active'));
 
-        // Show target page
         const targetPage = document.getElementById('page' + pageNumber);
         if (targetPage) {
             targetPage.classList.add('active');
