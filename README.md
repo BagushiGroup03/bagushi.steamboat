@@ -1,9 +1,9 @@
 --
 
-- BAGUSHI STEAMBOAT & GRILL CHANGLUN[cite: 1]
-- [Banner Image Placeholder][cite: 1]
-- Welcome Header[cite: 1]
-- [Next Button][cite: 1]
+ BAGUSHI STEAMBOAT & GRILL CHANGLUN[cite: 1]
+ [Banner Image Placeholder][cite: 1]
+ Welcome Header[cite: 1]
+ [Next Button][cite: 1]
 
 ---
 
