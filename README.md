@@ -1,4 +1,5 @@
 
+<!DOCTYPE html>
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
@@ -69,6 +70,19 @@
             font-size: 1.2rem;
             cursor: pointer;
             color: #555;
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #d9534f;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .header-title {
@@ -157,6 +171,9 @@
             background: #fafafa;
             position: relative;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .product-card img {
@@ -174,7 +191,18 @@
             color: #888;
         }
 
-        /* Cart Page 7 */
+        .btn-add-quick {
+            background: #222;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        /* Cart Page 7 Styles */
         .cart-item {
             display: flex;
             align-items: center;
@@ -279,8 +307,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <!-- Gambar Utama Kedai Bagushi Steamboat & Grill -->
-        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill Logo/Plang">
+        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill Logo">
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
         <p class="subtitle">Sistem Pesanan Digital & Layanan Pantas</p>
         <button class="btn-primary" onclick="goToPage(2)">Next</button>
@@ -318,7 +345,6 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <!-- Gambar Kedai Bagushi Steamboat & Grill -->
         <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill">
         <h2 class="title-large">PILIH MEJA</h2>
         <p class="subtitle">Please confirm your table number to view the menu.</p>
@@ -339,7 +365,9 @@
     <div id="page4" class="page">
         <div class="top-bar">
             <span style="font-size:0.8rem; color:#666;">Recent</span>
-            <i class="fa-solid fa-cart-shopping" onclick="goToPage(7)" style="font-size:1.3rem;"></i>
+            <i class="fa-solid fa-cart-shopping" onclick="goToPage(7)" style="font-size:1.3rem;">
+                <span class="cart-badge total-cart-count">0</span>
+            </i>
         </div>
         <input type="text" class="form-input" placeholder="🔍 Search menu...">
         
@@ -372,74 +400,81 @@
             <div>
                 <i class="fa-solid fa-magnifying-glass"></i> &nbsp;
                 <i class="fa-regular fa-user"></i> &nbsp;
-                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)"></i>
+                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)">
+                    <span class="cart-badge total-cart-count">0</span>
+                </i>
             </div>
         </div>
 
         <div class="grid-2x2">
-            <div class="product-card" onclick="goToPage(6)">
+            <div class="product-card">
                 <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Sliced+Beef" alt="Sliced Beef">
+                <img src="https://via.placeholder.com/150?text=Sliced+Beef" alt="Sliced Beef" onclick="openProductDetail('Sliced Beef', 12.00, 'https://via.placeholder.com/150?text=Sliced+Beef')">
                 <p style="font-weight: bold; margin-top: 5px;">Sliced Beef</p>
                 <small>RM 12.00</small>
+                <button class="btn-add-quick" onclick="addToCart('Sliced Beef', 12.00, 'https://via.placeholder.com/150?text=Sliced+Beef')">+ Tambah</button>
             </div>
-            <div class="product-card" onclick="goToPage(6)">
+            <div class="product-card">
                 <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Marinated+Chicken" alt="Chicken">
+                <img src="https://via.placeholder.com/150?text=Marinated+Chicken" alt="Chicken" onclick="openProductDetail('Chicken Slice', 10.00, 'https://via.placeholder.com/150?text=Marinated+Chicken')">
                 <p style="font-weight: bold; margin-top: 5px;">Chicken Slice</p>
                 <small>RM 10.00</small>
+                <button class="btn-add-quick" onclick="addToCart('Chicken Slice', 10.00, 'https://via.placeholder.com/150?text=Marinated+Chicken')">+ Tambah</button>
             </div>
-            <div class="product-card" onclick="goToPage(6)">
+            <div class="product-card">
                 <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Fishball+Combo" alt="Fishball">
+                <img src="https://via.placeholder.com/150?text=Fishball+Combo" alt="Fishball" onclick="openProductDetail('Fishball Combo', 8.00, 'https://via.placeholder.com/150?text=Fishball+Combo')">
                 <p style="font-weight: bold; margin-top: 5px;">Fishball Combo</p>
                 <small>RM 8.00</small>
+                <button class="btn-add-quick" onclick="addToCart('Fishball Combo', 8.00, 'https://via.placeholder.com/150?text=Fishball+Combo')">+ Tambah</button>
             </div>
-            <div class="product-card" onclick="goToPage(6)">
+            <div class="product-card">
                 <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Prawns+Fresh" alt="Prawns">
+                <img src="https://via.placeholder.com/150?text=Prawns+Fresh" alt="Prawns" onclick="openProductDetail('Fresh Prawns', 15.00, 'https://via.placeholder.com/150?text=Prawns+Fresh')">
                 <p style="font-weight: bold; margin-top: 5px;">Fresh Prawns</p>
                 <small>RM 15.00</small>
+                <button class="btn-add-quick" onclick="addToCart('Fresh Prawns', 15.00, 'https://via.placeholder.com/150?text=Prawns+Fresh')">+ Tambah</button>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 10px;">
+        <div style="text-align: center; margin-top: auto;">
             <small style="color:#777;">Showing 4 out of 10</small><br><br>
-            <button class="btn-primary" style="width: auto; padding: 8px 25px;" onclick="goToPage(7)">Go to Cart</button>
+            <button class="btn-primary" onclick="goToPage(7)">Go to Cart (<span class="total-cart-count">0</span>)</button>
         </div>
     </div>
 
     <!-- PAGE 6: Product Detail & Special Request -->
     <div id="page6" class="page">
         <div class="top-bar">
-            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-chevron-left" onclick="goToPage(5)"></i>
             <div>
                 <i class="fa-solid fa-magnifying-glass"></i> &nbsp;
                 <i class="fa-regular fa-user"></i> &nbsp;
-                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)"></i>
+                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)">
+                    <span class="cart-badge total-cart-count">0</span>
+                </i>
             </div>
         </div>
 
-        <h2 style="margin-bottom: 10px;">Sliced Beef Premium</h2>
+        <h2 id="detailName" style="margin-bottom: 10px;">Sliced Beef Premium</h2>
         <div style="position: relative;">
-            <img src="https://via.placeholder.com/350x200?text=Sliced+Beef+Premium" class="img-header" style="height: 200px;">
+            <img id="detailImg" src="https://via.placeholder.com/350x200?text=Sliced+Beef+Premium" class="img-header" style="height: 200px;">
             <i class="fa-regular fa-heart heart-icon" style="font-size: 1.3rem;"></i>
         </div>
 
-        <p style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Price: RM 12.00</p>
-        <p style="margin-bottom: 15px;">Quantity: 1 Set</p>
+        <p id="detailPrice" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Price: RM 12.00</p>
 
-        <label style="font-weight: bold; display: block; margin-bottom: 5px;">Special Request:</label>
-        <input type="text" class="form-input" placeholder="Cth: Kurangkan pedas / Ekstra kuah">
+        <label style="font-weight: bold; display: block; margin-top: 15px; margin-bottom: 5px;">Special Request:</label>
+        <input type="text" id="specialRequest" class="form-input" placeholder="Cth: Kurangkan pedas / Ekstra kuah">
 
-        <button class="btn-primary" onclick="addToCart()">Add to Cart</button>
+        <button class="btn-primary" onclick="addCurrentDetailToCart()">Add to Cart</button>
 
         <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-        <p style="font-weight: bold;">Feature Title</p>
+        <p style="font-weight: bold;">Ulasan Pelanggan</p>
         <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
             <img src="https://via.placeholder.com/50" style="border-radius: 5px;">
             <div>
-                <small style="font-weight: bold;">Ulasan Pelanggan</small><br>
+                <small style="font-weight: bold;">Menu Popular Bagushi</small><br>
                 <small>⭐⭐⭐⭐⭐ (5/5)</small>
             </div>
         </div>
@@ -447,42 +482,22 @@
 
     <!-- PAGE 7: My Cart & Checkout -->
     <div id="page7" class="page">
-        <h2 style="margin-bottom: 20px;">My cart</h2>
-
-        <div class="cart-item">
-            <img src="https://via.placeholder.com/60?text=Beef">
-            <div style="flex:1;">
-                <p style="font-weight: bold; font-size: 0.9rem;">Sliced Beef</p>
-                <small style="color:#666;">RM 12.00</small>
-            </div>
-            <div class="qty-controls">
-                <button class="qty-btn">-</button>
-                <span>1</span>
-                <button class="qty-btn">+</button>
-            </div>
-            <i class="fa-regular fa-trash-can" style="color: #999; cursor: pointer;"></i>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <i class="fa-solid fa-chevron-left" onclick="goToPage(5)"></i>
+            <h2>My cart</h2>
         </div>
 
-        <div class="cart-item">
-            <img src="https://via.placeholder.com/60?text=Chicken">
-            <div style="flex:1;">
-                <p style="font-weight: bold; font-size: 0.9rem;">Chicken Slice</p>
-                <small style="color:#666;">RM 20.00 (x2)</small>
-            </div>
-            <div class="qty-controls">
-                <button class="qty-btn">-</button>
-                <span>2</span>
-                <button class="qty-btn">+</button>
-            </div>
-            <i class="fa-regular fa-trash-can" style="color: #999; cursor: pointer;"></i>
+        <!-- Dynamic Cart Items Container -->
+        <div id="cartList" style="flex: 1; overflow-y: auto;">
+            <!-- Cart items will be loaded dynamically via JavaScript -->
         </div>
 
         <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid #eee;">
             <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; margin-bottom: 15px;">
                 <span>Total</span>
-                <span>RM 32.00</span>
+                <span>RM <span id="cartTotalPrice">0.00</span></span>
             </div>
-            <button class="btn-primary" onclick="goToPage(8)">Checkout</button>
+            <button class="btn-primary" onclick="checkout()">Checkout</button>
         </div>
     </div>
 
@@ -591,6 +606,11 @@
 </div>
 
 <script>
+    // Shopping Cart Data Array
+    let cart = [];
+    let currentDetailItem = null;
+
+    // Page Navigation
     function goToPage(pageNumber) {
         const pages = document.querySelectorAll('.page');
         pages.forEach(page => page.classList.remove('active'));
@@ -598,6 +618,10 @@
         const targetPage = document.getElementById('page' + pageNumber);
         if (targetPage) {
             targetPage.classList.add('active');
+        }
+
+        if (pageNumber === 7) {
+            renderCart();
         }
     }
 
@@ -610,9 +634,105 @@
         goToPage(4);
     }
 
-    function addToCart() {
-        alert('Item telah ditambah ke dalam troli!');
-        goToPage(7);
+    // Add item directly to Cart (Can click multiple times)
+    function addToCart(name, price, img) {
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.qty += 1;
+        } else {
+            cart.push({ name: name, price: price, img: img, qty: 1 });
+        }
+        updateCartBadge();
+        alert(`${name} telah ditambah ke dalam troli!`);
+    }
+
+    // Open detail page for item
+    function openProductDetail(name, price, img) {
+        currentDetailItem = { name: name, price: price, img: img };
+        document.getElementById('detailName').innerText = name;
+        document.getElementById('detailPrice').innerText = 'Price: RM ' + price.toFixed(2);
+        document.getElementById('detailImg').src = img;
+        document.getElementById('specialRequest').value = '';
+        goToPage(6);
+    }
+
+    // Add item from detail page (Page 6)
+    function addCurrentDetailToCart() {
+        if (currentDetailItem) {
+            addToCart(currentDetailItem.name, currentDetailItem.price, currentDetailItem.img);
+            goToPage(7);
+        }
+    }
+
+    // Update Badges across screens
+    function updateCartBadge() {
+        const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        document.querySelectorAll('.total-cart-count').forEach(el => {
+            el.innerText = totalItems;
+        });
+    }
+
+    // Render Items in My Cart (Page 7)
+    function renderCart() {
+        const cartList = document.getElementById('cartList');
+        cartList.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartList.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Troli anda masih kosong.</p>';
+            document.getElementById('cartTotalPrice').innerText = '0.00';
+            return;
+        }
+
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.qty;
+            total += itemTotal;
+
+            const itemHTML = `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="${item.name}">
+                    <div style="flex:1;">
+                        <p style="font-weight: bold; font-size: 0.9rem;">${item.name}</p>
+                        <small style="color:#666;">RM ${item.price.toFixed(2)}</small>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                    </div>
+                    <i class="fa-regular fa-trash-can" style="color: #999; cursor: pointer;" onclick="removeItem(${index})"></i>
+                </div>
+            `;
+            cartList.innerHTML += itemHTML;
+        });
+
+        document.getElementById('cartTotalPrice').innerText = total.toFixed(2);
+        updateCartBadge();
+    }
+
+    // Change Item Quantity inside Cart
+    function changeQty(index, change) {
+        cart[index].qty += change;
+        if (cart[index].qty <= 0) {
+            cart.splice(index, 1);
+        }
+        renderCart();
+    }
+
+    // Remove Item from Cart
+    function removeItem(index) {
+        cart.splice(index, 1);
+        renderCart();
+    }
+
+    // Checkout Action
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Troli anda kosong! Sila tambah pesanan terlebih dahulu.');
+            return;
+        }
+        goToPage(8);
     }
 </script>
 
