@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -309,7 +308,7 @@
         </div>
         <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill Logo">
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
-        <p class="subtitle">Sistem Pesanan Digital & Layanan Pantas</p>
+        <p class="subtitle">Digital Ordering System & Fast Service</p>
         <button class="btn-primary" onclick="goToPage(2)">Next</button>
     </div>
 
@@ -324,14 +323,14 @@
             </div>
         </div>
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
-        <p class="subtitle">Log Masuk Pelanggan</p>
+        <p class="subtitle">Customer Sign In</p>
         
-        <input type="text" class="form-input" placeholder="Nama / Emel">
-        <input type="password" class="form-input" placeholder="Kata Laluan">
+        <input type="text" class="form-input" placeholder="Name / Email">
+        <input type="password" class="form-input" placeholder="Password">
         
         <button class="btn-primary" style="margin-top: 10px;" onclick="goToPage(3)">Sign In</button>
         <div style="text-align: center; margin-top: 15px;">
-            <small onclick="goToPage(9)" style="cursor: pointer; text-decoration: underline; color: #666;">(Akses Pekerja/Dapur - Page 9)</small>
+            <small onclick="goToPage(9)" style="cursor: pointer; text-decoration: underline; color: #666;">(Staff/Kitchen Access - Page 9)</small>
         </div>
     </div>
 
@@ -346,47 +345,57 @@
             </div>
         </div>
         <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill">
-        <h2 class="title-large">PILIH MEJA</h2>
+        <h2 class="title-large">SELECT TABLE</h2>
         <p class="subtitle">Please confirm your table number to view the menu.</p>
         
         <select id="selectMeja" class="form-input" style="font-weight: bold;">
-            <option value="">-- Pilih Nombor Meja --</option>
-            <option value="Meja 01">Meja 01</option>
-            <option value="Meja 02">Meja 02</option>
-            <option value="Meja 05">Meja 05</option>
-            <option value="Meja 08">Meja 08</option>
-            <option value="Meja 12">Meja 12</option>
+            <option value="">-- Select Table Number --</option>
+            <option value="Table 01">Table 01</option>
+            <option value="Table 02">Table 02</option>
+            <option value="Table 05">Table 05</option>
+            <option value="Table 08">Table 08</option>
+            <option value="Table 12">Table 12</option>
         </select>
         
         <button class="btn-primary" onclick="confirmTable()">View Menu</button>
     </div>
 
-    <!-- PAGE 4: Main Categories / Recommendations -->
+    <!-- PAGE 4: Main Categories / Recommendations & Search Menu -->
     <div id="page4" class="page">
         <div class="top-bar">
-            <span style="font-size:0.8rem; color:#666;">Recent</span>
+            <span style="font-size:0.8rem; color:#666;">Menu Search</span>
             <i class="fa-solid fa-cart-shopping" onclick="goToPage(7)" style="font-size:1.3rem;">
                 <span class="cart-badge total-cart-count">0</span>
             </i>
         </div>
-        <input type="text" class="form-input" placeholder="🔍 Search menu...">
+        <!-- Live Search Input -->
+        <input type="text" id="searchMenuInput" class="form-input" placeholder="🔍 Search menu (e.g., Beef, Chicken...)" oninput="filterMenu(this.value)">
         
-        <p style="font-weight: bold; margin-bottom: 10px;">Suggestions</p>
-        <div class="category-card" onclick="goToPage(5)">
-            <span>Best Sellers</span>
-            <i class="fa-solid fa-chevron-right"></i>
+        <!-- Search Results Container -->
+        <div id="searchResults" style="display: none; margin-bottom: 15px;">
+            <p style="font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; color:#d9534f;">Search Results:</p>
+            <div id="searchResultList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
         </div>
-        <div class="category-card" onclick="goToPage(5)">
-            <span>Set Steamboat & Grill</span>
-            <i class="fa-solid fa-chevron-right"></i>
-        </div>
-        <div class="category-card" onclick="goToPage(5)">
-            <span>Daging & Seafood</span>
-            <i class="fa-solid fa-chevron-right"></i>
-        </div>
-        <div class="category-card" onclick="goToPage(5)">
-            <span>Minuman & Pencuci Mulut</span>
-            <i class="fa-solid fa-chevron-right"></i>
+
+        <div id="defaultCategories">
+            <p style="font-weight: bold; margin-bottom: 10px;">Suggestions / Categories</p>
+            <div class="category-card" onclick="goToPage(5)">
+                <span>Best Sellers</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="category-card" onclick="goToPage(5)">
+                <span>Steamboat & Grill Sets</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="category-card" onclick="goToPage(5)">
+                <span>Meat & Seafood</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="category-card" onclick="goToPage(5)">
+                <span>Drinks & Desserts</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
         </div>
     </div>
 
@@ -406,39 +415,12 @@
             </div>
         </div>
 
-        <div class="grid-2x2">
-            <div class="product-card">
-                <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Sliced+Beef" alt="Sliced Beef" onclick="openProductDetail('Sliced Beef', 12.00, 'https://via.placeholder.com/150?text=Sliced+Beef')">
-                <p style="font-weight: bold; margin-top: 5px;">Sliced Beef</p>
-                <small>RM 12.00</small>
-                <button class="btn-add-quick" onclick="addToCart('Sliced Beef', 12.00, 'https://via.placeholder.com/150?text=Sliced+Beef')">+ Tambah</button>
-            </div>
-            <div class="product-card">
-                <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Marinated+Chicken" alt="Chicken" onclick="openProductDetail('Chicken Slice', 10.00, 'https://via.placeholder.com/150?text=Marinated+Chicken')">
-                <p style="font-weight: bold; margin-top: 5px;">Chicken Slice</p>
-                <small>RM 10.00</small>
-                <button class="btn-add-quick" onclick="addToCart('Chicken Slice', 10.00, 'https://via.placeholder.com/150?text=Marinated+Chicken')">+ Tambah</button>
-            </div>
-            <div class="product-card">
-                <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Fishball+Combo" alt="Fishball" onclick="openProductDetail('Fishball Combo', 8.00, 'https://via.placeholder.com/150?text=Fishball+Combo')">
-                <p style="font-weight: bold; margin-top: 5px;">Fishball Combo</p>
-                <small>RM 8.00</small>
-                <button class="btn-add-quick" onclick="addToCart('Fishball Combo', 8.00, 'https://via.placeholder.com/150?text=Fishball+Combo')">+ Tambah</button>
-            </div>
-            <div class="product-card">
-                <i class="fa-regular fa-heart heart-icon"></i>
-                <img src="https://via.placeholder.com/150?text=Prawns+Fresh" alt="Prawns" onclick="openProductDetail('Fresh Prawns', 15.00, 'https://via.placeholder.com/150?text=Prawns+Fresh')">
-                <p style="font-weight: bold; margin-top: 5px;">Fresh Prawns</p>
-                <small>RM 15.00</small>
-                <button class="btn-add-quick" onclick="addToCart('Fresh Prawns', 15.00, 'https://via.placeholder.com/150?text=Prawns+Fresh')">+ Tambah</button>
-            </div>
+        <div class="grid-2x2" id="foodGridContainer">
+            <!-- Dynamically populated via JS -->
         </div>
 
-        <div style="text-align: center; margin-top: auto;">
-            <small style="color:#777;">Showing 4 out of 10</small><br><br>
+        <div style="text-align: center; margin-top: 10px;">
+            <small style="color:#777;">Showing all items</small><br><br>
             <button class="btn-primary" onclick="goToPage(7)">Go to Cart (<span class="total-cart-count">0</span>)</button>
         </div>
     </div>
@@ -465,16 +447,16 @@
         <p id="detailPrice" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Price: RM 12.00</p>
 
         <label style="font-weight: bold; display: block; margin-top: 15px; margin-bottom: 5px;">Special Request:</label>
-        <input type="text" id="specialRequest" class="form-input" placeholder="Cth: Kurangkan pedas / Ekstra kuah">
+        <input type="text" id="specialRequest" class="form-input" placeholder="E.g., Less spicy / Extra soup">
 
         <button class="btn-primary" onclick="addCurrentDetailToCart()">Add to Cart</button>
 
         <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-        <p style="font-weight: bold;">Ulasan Pelanggan</p>
+        <p style="font-weight: bold;">Customer Reviews</p>
         <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
             <img src="https://via.placeholder.com/50" style="border-radius: 5px;">
             <div>
-                <small style="font-weight: bold;">Menu Popular Bagushi</small><br>
+                <small style="font-weight: bold;">Bagushi Popular Menu</small><br>
                 <small>⭐⭐⭐⭐⭐ (5/5)</small>
             </div>
         </div>
@@ -489,7 +471,7 @@
 
         <!-- Dynamic Cart Items Container -->
         <div id="cartList" style="flex: 1; overflow-y: auto;">
-            <!-- Cart items will be loaded dynamically via JavaScript -->
+            <!-- Cart items loaded dynamically -->
         </div>
 
         <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid #eee;">
@@ -524,8 +506,8 @@
         </div>
 
         <div style="text-align: center; margin-top: auto;">
-            <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Pesanan anda sedang diproses oleh dapur Bagushi.</p>
-            <button class="btn-primary" onclick="goToPage(9)">Ke Halaman Pentadbir (Page 9)</button>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Your order is being processed by the Bagushi kitchen.</p>
+            <button class="btn-primary" onclick="goToPage(9)">Go to Staff Dashboard (Page 9)</button>
         </div>
     </div>
 
@@ -600,15 +582,43 @@
             <option value="Not Started">Not Started</option>
         </select>
 
-        <button class="btn-primary" style="margin-top: 15px;" onclick="alert('Status pesanan telah dikemas kini!'); goToPage(9);">Update Status</button>
+        <button class="btn-primary" style="margin-top: 15px;" onclick="alert('Order status updated successfully!'); goToPage(9);">Update Status</button>
     </div>
 
 </div>
 
 <script>
-    // Shopping Cart Data Array
+    // Food Menu Items List
+    const menuItems = [
+        { name: 'Sliced Beef', price: 12.00, img: 'https://via.placeholder.com/150?text=Sliced+Beef' },
+        { name: 'Chicken Slice', price: 10.00, img: 'https://via.placeholder.com/150?text=Marinated+Chicken' },
+        { name: 'Fishball Combo', price: 8.00, img: 'https://via.placeholder.com/150?text=Fishball+Combo' },
+        { name: 'Fresh Prawns', price: 15.00, img: 'https://via.placeholder.com/150?text=Prawns+Fresh' }
+    ];
+
     let cart = [];
     let currentDetailItem = null;
+
+    // Load initial products into Page 5 Grid
+    window.onload = function() {
+        renderFoodGrid();
+    };
+
+    function renderFoodGrid() {
+        const gridContainer = document.getElementById('foodGridContainer');
+        gridContainer.innerHTML = '';
+        menuItems.forEach(item => {
+            gridContainer.innerHTML += `
+                <div class="product-card">
+                    <i class="fa-regular fa-heart heart-icon"></i>
+                    <img src="${item.img}" alt="${item.name}" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}')">
+                    <p style="font-weight: bold; margin-top: 5px;">${item.name}</p>
+                    <small>RM ${item.price.toFixed(2)}</small>
+                    <button class="btn-add-quick" onclick="addToCart('${item.name}', ${item.price}, '${item.img}')">+ Add</button>
+                </div>
+            `;
+        });
+    }
 
     // Page Navigation
     function goToPage(pageNumber) {
@@ -628,13 +638,54 @@
     function confirmTable() {
         const table = document.getElementById('selectMeja').value;
         if (!table) {
-            alert('Sila pilih nombor meja terlebih dahulu!');
+            alert('Please select a table number first!');
             return;
         }
         goToPage(4);
     }
 
-    // Add item directly to Cart (Can click multiple times)
+    // Real-time Search Filter Function
+    function filterMenu(query) {
+        const searchResultsBox = document.getElementById('searchResults');
+        const searchResultList = document.getElementById('searchResultList');
+        const defaultCategories = document.getElementById('defaultCategories');
+        
+        searchResultList.innerHTML = '';
+        const keyword = query.toLowerCase().trim();
+
+        if (keyword === '') {
+            searchResultsBox.style.display = 'none';
+            defaultCategories.style.display = 'block';
+            return;
+        }
+
+        const filtered = menuItems.filter(item => item.name.toLowerCase().includes(keyword));
+
+        searchResultsBox.style.display = 'block';
+        defaultCategories.style.display = 'none';
+
+        if (filtered.length === 0) {
+            searchResultList.innerHTML = '<small style="color:#999;">No matching menu items found.</small>';
+            return;
+        }
+
+        filtered.forEach(item => {
+            searchResultList.innerHTML += `
+                <div class="category-card" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}')" style="padding: 10px 15px; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="${item.img}" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
+                        <div>
+                            <span style="font-size: 0.9rem; font-weight: bold;">${item.name}</span><br>
+                            <small style="color: #666;">RM ${item.price.toFixed(2)}</small>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i>
+                </div>
+            `;
+        });
+    }
+
+    // Add item directly to Cart
     function addToCart(name, price, img) {
         const existingItem = cart.find(item => item.name === name);
         if (existingItem) {
@@ -643,7 +694,7 @@
             cart.push({ name: name, price: price, img: img, qty: 1 });
         }
         updateCartBadge();
-        alert(`${name} telah ditambah ke dalam troli!`);
+        alert(`${name} has been added to cart!`);
     }
 
     // Open detail page for item
@@ -678,7 +729,7 @@
         cartList.innerHTML = '';
 
         if (cart.length === 0) {
-            cartList.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Troli anda masih kosong.</p>';
+            cartList.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Your cart is currently empty.</p>';
             document.getElementById('cartTotalPrice').innerText = '0.00';
             return;
         }
@@ -711,7 +762,6 @@
         updateCartBadge();
     }
 
-    // Change Item Quantity inside Cart
     function changeQty(index, change) {
         cart[index].qty += change;
         if (cart[index].qty <= 0) {
@@ -720,16 +770,14 @@
         renderCart();
     }
 
-    // Remove Item from Cart
     function removeItem(index) {
         cart.splice(index, 1);
         renderCart();
     }
 
-    // Checkout Action
     function checkout() {
         if (cart.length === 0) {
-            alert('Troli anda kosong! Sila tambah pesanan terlebih dahulu.');
+            alert('Your cart is empty! Please add some items first.');
             return;
         }
         goToPage(8);
