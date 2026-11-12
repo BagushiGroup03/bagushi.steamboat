@@ -143,6 +143,32 @@
             box-sizing: border-box;
         }
 
+        /* Password Wrapper for Hide/Show */
+        .password-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 12px;
+            padding-right: 40px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 0;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
         /* Page 4 & 5 Grid Styles */
         .category-card {
             display: flex;
@@ -312,7 +338,7 @@
         <button class="btn-primary" onclick="goToPage(2)">Next</button>
     </div>
 
-    <!-- PAGE 2: Login / Register Form -->
+    <!-- PAGE 2: Login / Register Form with Validation & Hide/Show Password -->
     <div id="page2" class="page">
         <div class="top-bar">
             <i class="fa-solid fa-bars"></i>
@@ -325,10 +351,14 @@
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
         <p class="subtitle">Customer Sign In</p>
         
-        <input type="text" class="form-input" placeholder="Name / Email">
-        <input type="password" class="form-input" placeholder="Password">
+        <input type="text" id="loginEmail" class="form-input" placeholder="Name / Email" required>
         
-        <button class="btn-primary" style="margin-top: 10px;" onclick="goToPage(3)">Sign In</button>
+        <div class="password-container">
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <i class="fa-solid fa-eye toggle-password" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+        </div>
+        
+        <button class="btn-primary" style="margin-top: 10px;" onclick="handleSignIn()">Sign In</button>
         <div style="text-align: center; margin-top: 15px;">
             <small onclick="goToPage(9)" style="cursor: pointer; text-decoration: underline; color: #666;">(Staff/Kitchen Access - Page 9)</small>
         </div>
@@ -368,10 +398,8 @@
                 <span class="cart-badge total-cart-count">0</span>
             </i>
         </div>
-        <!-- Live Search Input -->
         <input type="text" id="searchMenuInput" class="form-input" placeholder="🔍 Search menu (e.g., Beef, Chicken...)" oninput="filterMenu(this.value)">
         
-        <!-- Search Results Container -->
         <div id="searchResults" style="display: none; margin-bottom: 15px;">
             <p style="font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; color:#d9534f;">Search Results:</p>
             <div id="searchResultList" style="display: flex; flex-direction: column; gap: 8px;"></div>
@@ -415,9 +443,7 @@
             </div>
         </div>
 
-        <div class="grid-2x2" id="foodGridContainer">
-            <!-- Dynamically populated via JS -->
-        </div>
+        <div class="grid-2x2" id="foodGridContainer"></div>
 
         <div style="text-align: center; margin-top: 10px;">
             <small style="color:#777;">Showing all items</small><br><br>
@@ -469,10 +495,7 @@
             <h2>My cart</h2>
         </div>
 
-        <!-- Dynamic Cart Items Container -->
-        <div id="cartList" style="flex: 1; overflow-y: auto;">
-            <!-- Cart items loaded dynamically -->
-        </div>
+        <div id="cartList" style="flex: 1; overflow-y: auto;"></div>
 
         <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid #eee;">
             <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; margin-bottom: 15px;">
@@ -496,293 +519,3 @@
                 <span>Order Received</span>
             </div>
             <div class="status-node">
-                <div class="circle"></div>
-                <span style="color: #888;">Preparing</span>
-            </div>
-            <div class="status-node">
-                <div class="circle"></div>
-                <span style="color: #888;">Ready to Serve</span>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: auto;">
-            <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Your order is being processed by the Bagushi kitchen.</p>
-            <button class="btn-primary" onclick="goToPage(9)">Go to Staff Dashboard (Page 9)</button>
-        </div>
-    </div>
-
-    <!-- PAGE 9: Kitchen / Incoming Orders Dashboard -->
-    <div id="page9" class="page">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <i class="fa-solid fa-chevron-left" onclick="goToPage(1)"></i>
-            <h2 class="header-title">Incoming Orders</h2>
-        </div>
-
-        <div style="display: flex; gap: 5px; margin-bottom: 15px;">
-            <button class="btn-primary" style="padding: 6px; font-size:0.75rem;">All (3)</button>
-            <button class="btn-primary" style="padding: 6px; font-size:0.75rem; background:#888;">Preparing (2)</button>
-            <button class="btn-primary" style="padding: 6px; font-size:0.75rem; background:#888;">Ready (1)</button>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Table No.</th>
-                    <th>Items</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>05</td>
-                    <td>Sliced Beef x1<br>Chicken x2</td>
-                    <td>1:00 PM</td>
-                    <td><span class="badge badge-done">Done</span></td>
-                    <td><button style="padding:2px 6px;" onclick="goToPage(10)">View</button></td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>Fishball x5<br>Crabsticks x2</td>
-                    <td>1:03 PM</td>
-                    <td><span class="badge badge-progress">In prog...</span></td>
-                    <td><button style="padding:2px 6px;" onclick="goToPage(10)">View</button></td>
-                </tr>
-                <tr>
-                    <td>08</td>
-                    <td>Squid x1<br>Prawns x1</td>
-                    <td>1:06 PM</td>
-                    <td><span class="badge badge-pending">Not sta...</span></td>
-                    <td><button style="padding:2px 6px;" onclick="goToPage(10)">View</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- PAGE 10: Kitchen / Update Order Status -->
-    <div id="page10" class="page">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-            <i class="fa-solid fa-chevron-left" onclick="goToPage(9)"></i>
-            <h2 class="header-title">Update Order Status</h2>
-        </div>
-
-        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 25px;">
-            <h3 style="margin-bottom: 10px;">Table No 5</h3>
-            <p style="color: #444; line-height: 1.5;">
-                Sliced Beef x1<br>
-                Chicken x2
-            </p>
-        </div>
-
-        <label style="font-weight: bold; display: block; margin-bottom: 8px;">Status:</label>
-        <select class="form-input" style="font-weight: bold; height: 45px;">
-            <option value="Done">Done</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Not Started">Not Started</option>
-        </select>
-
-        <button class="btn-primary" style="margin-top: 15px;" onclick="alert('Order status updated successfully!'); goToPage(9);">Update Status</button>
-    </div>
-
-</div>
-
-<script>
-    // Food Menu Items List
-    const menuItems = [
-        { name: 'Sliced Beef', price: 12.00, img: 'https://via.placeholder.com/150?text=Sliced+Beef' },
-        { name: 'Chicken Slice', price: 10.00, img: 'https://via.placeholder.com/150?text=Marinated+Chicken' },
-        { name: 'Fishball Combo', price: 8.00, img: 'https://via.placeholder.com/150?text=Fishball+Combo' },
-        { name: 'Fresh Prawns', price: 15.00, img: 'https://via.placeholder.com/150?text=Prawns+Fresh' }
-    ];
-
-    let cart = [];
-    let currentDetailItem = null;
-
-    // Load initial products into Page 5 Grid
-    window.onload = function() {
-        renderFoodGrid();
-    };
-
-    function renderFoodGrid() {
-        const gridContainer = document.getElementById('foodGridContainer');
-        gridContainer.innerHTML = '';
-        menuItems.forEach(item => {
-            gridContainer.innerHTML += `
-                <div class="product-card">
-                    <i class="fa-regular fa-heart heart-icon"></i>
-                    <img src="${item.img}" alt="${item.name}" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}')">
-                    <p style="font-weight: bold; margin-top: 5px;">${item.name}</p>
-                    <small>RM ${item.price.toFixed(2)}</small>
-                    <button class="btn-add-quick" onclick="addToCart('${item.name}', ${item.price}, '${item.img}')">+ Add</button>
-                </div>
-            `;
-        });
-    }
-
-    // Page Navigation
-    function goToPage(pageNumber) {
-        const pages = document.querySelectorAll('.page');
-        pages.forEach(page => page.classList.remove('active'));
-
-        const targetPage = document.getElementById('page' + pageNumber);
-        if (targetPage) {
-            targetPage.classList.add('active');
-        }
-
-        if (pageNumber === 7) {
-            renderCart();
-        }
-    }
-
-    function confirmTable() {
-        const table = document.getElementById('selectMeja').value;
-        if (!table) {
-            alert('Please select a table number first!');
-            return;
-        }
-        goToPage(4);
-    }
-
-    // Real-time Search Filter Function
-    function filterMenu(query) {
-        const searchResultsBox = document.getElementById('searchResults');
-        const searchResultList = document.getElementById('searchResultList');
-        const defaultCategories = document.getElementById('defaultCategories');
-        
-        searchResultList.innerHTML = '';
-        const keyword = query.toLowerCase().trim();
-
-        if (keyword === '') {
-            searchResultsBox.style.display = 'none';
-            defaultCategories.style.display = 'block';
-            return;
-        }
-
-        const filtered = menuItems.filter(item => item.name.toLowerCase().includes(keyword));
-
-        searchResultsBox.style.display = 'block';
-        defaultCategories.style.display = 'none';
-
-        if (filtered.length === 0) {
-            searchResultList.innerHTML = '<small style="color:#999;">No matching menu items found.</small>';
-            return;
-        }
-
-        filtered.forEach(item => {
-            searchResultList.innerHTML += `
-                <div class="category-card" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}')" style="padding: 10px 15px; margin-bottom: 8px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <img src="${item.img}" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
-                        <div>
-                            <span style="font-size: 0.9rem; font-weight: bold;">${item.name}</span><br>
-                            <small style="color: #666;">RM ${item.price.toFixed(2)}</small>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i>
-                </div>
-            `;
-        });
-    }
-
-    // Add item directly to Cart
-    function addToCart(name, price, img) {
-        const existingItem = cart.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.qty += 1;
-        } else {
-            cart.push({ name: name, price: price, img: img, qty: 1 });
-        }
-        updateCartBadge();
-        alert(`${name} has been added to cart!`);
-    }
-
-    // Open detail page for item
-    function openProductDetail(name, price, img) {
-        currentDetailItem = { name: name, price: price, img: img };
-        document.getElementById('detailName').innerText = name;
-        document.getElementById('detailPrice').innerText = 'Price: RM ' + price.toFixed(2);
-        document.getElementById('detailImg').src = img;
-        document.getElementById('specialRequest').value = '';
-        goToPage(6);
-    }
-
-    // Add item from detail page (Page 6)
-    function addCurrentDetailToCart() {
-        if (currentDetailItem) {
-            addToCart(currentDetailItem.name, currentDetailItem.price, currentDetailItem.img);
-            goToPage(7);
-        }
-    }
-
-    // Update Badges across screens
-    function updateCartBadge() {
-        const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-        document.querySelectorAll('.total-cart-count').forEach(el => {
-            el.innerText = totalItems;
-        });
-    }
-
-    // Render Items in My Cart (Page 7)
-    function renderCart() {
-        const cartList = document.getElementById('cartList');
-        cartList.innerHTML = '';
-
-        if (cart.length === 0) {
-            cartList.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Your cart is currently empty.</p>';
-            document.getElementById('cartTotalPrice').innerText = '0.00';
-            return;
-        }
-
-        let total = 0;
-
-        cart.forEach((item, index) => {
-            const itemTotal = item.price * item.qty;
-            total += itemTotal;
-
-            const itemHTML = `
-                <div class="cart-item">
-                    <img src="${item.img}" alt="${item.name}">
-                    <div style="flex:1;">
-                        <p style="font-weight: bold; font-size: 0.9rem;">${item.name}</p>
-                        <small style="color:#666;">RM ${item.price.toFixed(2)}</small>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
-                        <span>${item.qty}</span>
-                        <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
-                    </div>
-                    <i class="fa-regular fa-trash-can" style="color: #999; cursor: pointer;" onclick="removeItem(${index})"></i>
-                </div>
-            `;
-            cartList.innerHTML += itemHTML;
-        });
-
-        document.getElementById('cartTotalPrice').innerText = total.toFixed(2);
-        updateCartBadge();
-    }
-
-    function changeQty(index, change) {
-        cart[index].qty += change;
-        if (cart[index].qty <= 0) {
-            cart.splice(index, 1);
-        }
-        renderCart();
-    }
-
-    function removeItem(index) {
-        cart.splice(index, 1);
-        renderCart();
-    }
-
-    function checkout() {
-        if (cart.length === 0) {
-            alert('Your cart is empty! Please add some items first.');
-            return;
-        }
-        goToPage(8);
-    }
-</script>
-
-</body>
-</html>
