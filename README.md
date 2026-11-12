@@ -332,13 +332,13 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill Logo">
+        <img src="bagushi.jpg" class="img-header" alt="Bagushi Steamboat & Grill Logo">
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
         <p class="subtitle">Digital Ordering System & Fast Service</p>
         <button class="btn-primary" onclick="goToPage(2)">Next</button>
     </div>
 
-    <!-- PAGE 2: Login / Register Form with Validation & Hide/Show Password -->
+    <!-- PAGE 2: Login / Register Form -->
     <div id="page2" class="page">
         <div class="top-bar">
             <i class="fa-solid fa-bars"></i>
@@ -374,7 +374,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <img src="https://lh3.googleusercontent.com/d/10Tz-aT0t0e13P3y0vN-7Y79t5A3U1O9=" class="img-header" alt="Bagushi Steamboat & Grill">
+        <img src="bagushi.jpg" class="img-header" alt="Bagushi Steamboat & Grill">
         <h2 class="title-large">SELECT TABLE</h2>
         <p class="subtitle">Please confirm your table number to view the menu.</p>
         
@@ -641,7 +641,6 @@
         });
     }
 
-    // Toggle Hide / Show Password Function
     function togglePasswordVisibility() {
         const passwordInput = document.getElementById('loginPassword');
         const toggleIcon = document.getElementById('togglePassword');
@@ -657,7 +656,6 @@
         }
     }
 
-    // Validate Sign In (Required Name/Email and Password)
     function handleSignIn() {
         const emailInput = document.getElementById('loginEmail').value.trim();
         const passwordInput = document.getElementById('loginPassword').value.trim();
@@ -667,11 +665,9 @@
             return;
         }
 
-        // Proceed to Page 3 if fields are filled
         goToPage(3);
     }
 
-    // Page Navigation
     function goToPage(pageNumber) {
         const pages = document.querySelectorAll('.page');
         pages.forEach(page => page.classList.remove('active'));
