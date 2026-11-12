@@ -332,7 +332,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <img src="bagushi.jpg" class="img-header" alt="Bagushi Steamboat & Grill Logo">
+        <img src="bagushi.jpg.png" class="img-header" alt="Bagushi Steamboat & Grill Logo">
         <h1 class="title-large">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
         <p class="subtitle">Digital Ordering System & Fast Service</p>
         <button class="btn-primary" onclick="goToPage(2)">Next</button>
@@ -374,7 +374,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <img src="bagushi.jpg" class="img-header" alt="Bagushi Steamboat & Grill">
+        <img src="bagushi.jpg.png" class="img-header" alt="Bagushi Steamboat & Grill">
         <h2 class="title-large">SELECT TABLE</h2>
         <p class="subtitle">Please confirm your table number to view the menu.</p>
         
