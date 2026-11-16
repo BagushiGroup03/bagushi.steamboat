@@ -169,65 +169,48 @@
             color: #777;
         }
 
-        /* Page 4 & 5 Grid Styles */
-        .category-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1.5px solid #222;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            cursor: pointer;
+        /* Menu List Styles */
+        .category-header {
+            font-size: 1rem;
             font-weight: bold;
+            color: #d9534f;
+            margin: 15px 0 8px 0;
+            border-bottom: 2px solid #f2f2f2;
+            padding-bottom: 4px;
         }
 
-        .grid-2x2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .product-card {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 10px;
-            background: #fafafa;
-            position: relative;
-            cursor: pointer;
+        .menu-item-row {
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f9f9f9;
         }
 
-        .product-card img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            background: #e0e0e0;
+        .menu-item-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
         }
 
-        .heart-icon {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            color: #888;
+        .menu-item-info small {
+            color: #666;
         }
 
-        .btn-add-quick {
+        .btn-add-menu {
             background: #222;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 0.8rem;
-            margin-top: 8px;
             cursor: pointer;
         }
 
-        /* Cart Page 7 Styles */
+        .btn-add-menu:hover {
+            background: #444;
+        }
+
+        /* Cart Page Styles */
         .cart-item {
             display: flex;
             align-items: center;
@@ -238,8 +221,8 @@
         }
 
         .cart-item img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 8px;
             object-fit: cover;
         }
@@ -390,7 +373,7 @@
         <button class="btn-primary" onclick="confirmTable()">View Menu</button>
     </div>
 
-    <!-- PAGE 4: Main Categories / Recommendations & Search Menu -->
+    <!-- PAGE 4: Search Menu -->
     <div id="page4" class="page">
         <div class="top-bar">
             <span style="font-size:0.8rem; color:#666;">Menu Search</span>
@@ -398,7 +381,7 @@
                 <span class="cart-badge total-cart-count">0</span>
             </i>
         </div>
-        <input type="text" id="searchMenuInput" class="form-input" placeholder="🔍 Search menu (e.g., Beef, Chicken...)" oninput="filterMenu(this.value)">
+        <input type="text" id="searchMenuInput" class="form-input" placeholder="🔍 Search all 54 items..." oninput="filterMenu(this.value)">
         
         <div id="searchResults" style="display: none; margin-bottom: 15px;">
             <p style="font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; color:#d9534f;">Search Results:</p>
@@ -407,48 +390,33 @@
         </div>
 
         <div id="defaultCategories">
-            <p style="font-weight: bold; margin-bottom: 10px;">Suggestions / Categories</p>
-            <div class="category-card" onclick="goToPage(5)">
-                <span>Best Sellers</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-            <div class="category-card" onclick="goToPage(5)">
-                <span>Steamboat & Grill Sets</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-            <div class="category-card" onclick="goToPage(5)">
-                <span>Meat & Seafood</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-            <div class="category-card" onclick="goToPage(5)">
-                <span>Drinks & Desserts</span>
+            <p style="font-weight: bold; margin-bottom: 10px;">Full Menu Categories</p>
+            <div class="category-card" onclick="goToPage(5)" style="display:flex; justify-content:space-between; border:1.5px solid #222; border-radius:12px; padding:15px; margin-bottom:12px; cursor:pointer; font-weight:bold;">
+                <span>Browse All 54 Menu Items</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     </div>
 
-    <!-- PAGE 5: Food Categories Grid -->
+    <!-- PAGE 5: Full Menu List (All 54 Items) -->
     <div id="page5" class="page">
         <div class="top-bar">
             <div style="display:flex; align-items:center; gap:8px;">
                 <i class="fa-solid fa-chevron-left" onclick="goToPage(4)"></i>
-                <span class="header-title">Food Categories</span>
+                <span class="header-title">Full Menu List</span>
             </div>
             <div>
-                <i class="fa-solid fa-magnifying-glass"></i> &nbsp;
-                <i class="fa-regular fa-user"></i> &nbsp;
-                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)">
+                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)" style="font-size: 1.2rem; cursor: pointer;">
                     <span class="cart-badge total-cart-count">0</span>
                 </i>
             </div>
         </div>
 
-        <div class="grid-2x2" id="foodGridContainer"></div>
-
-        <div style="text-align: center; margin-top: 10px;">
-            <small style="color:#777;">Showing all items</small><br><br>
-            <button class="btn-primary" onclick="goToPage(7)">Go to Cart (<span class="total-cart-count">0</span>)</button>
+        <div id="fullMenuListContainer" style="flex:1; overflow-y:auto; padding-bottom: 20px;">
+            <!-- Generated dynamically via JavaScript -->
         </div>
+
+        <button class="btn-primary" onclick="goToPage(7)">Go to Cart (<span class="total-cart-count">0</span>)</button>
     </div>
 
     <!-- PAGE 6: Product Detail & Special Request -->
@@ -456,36 +424,24 @@
         <div class="top-bar">
             <i class="fa-solid fa-chevron-left" onclick="goToPage(5)"></i>
             <div>
-                <i class="fa-solid fa-magnifying-glass"></i> &nbsp;
-                <i class="fa-regular fa-user"></i> &nbsp;
-                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)">
+                <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)" style="font-size: 1.2rem; cursor: pointer;">
                     <span class="cart-badge total-cart-count">0</span>
                 </i>
             </div>
         </div>
 
-        <h2 id="detailName" style="margin-bottom: 10px;">Sliced Beef Premium</h2>
+        <h2 id="detailName" style="margin-bottom: 10px;">Item Name</h2>
         <div style="position: relative;">
-            <img id="detailImg" src="https://via.placeholder.com/350x200?text=Sliced+Beef+Premium" class="img-header" style="height: 200px;">
-            <i class="fa-regular fa-heart heart-icon" style="font-size: 1.3rem;"></i>
+            <img id="detailImg" src="https://via.placeholder.com/350x200?text=Bagushi+Menu" class="img-header" style="height: 180px;">
         </div>
 
-        <p id="detailPrice" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Price: RM 12.00</p>
+        <p id="detailPrice" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Price: RM 0.00</p>
+        <p id="detailCategory" style="color: #666; font-size: 0.9rem; margin-bottom: 15px;"></p>
 
-        <label style="font-weight: bold; display: block; margin-top: 15px; margin-bottom: 5px;">Special Request:</label>
+        <label style="font-weight: bold; display: block; margin-top: 10px; margin-bottom: 5px;">Special Request:</label>
         <input type="text" id="specialRequest" class="form-input" placeholder="E.g., Less spicy / Extra soup">
 
         <button class="btn-primary" onclick="addCurrentDetailToCart()">Add to Cart</button>
-
-        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-        <p style="font-weight: bold;">Customer Reviews</p>
-        <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
-            <img src="https://via.placeholder.com/50" style="border-radius: 5px;">
-            <div>
-                <small style="font-weight: bold;">Bagushi Popular Menu</small><br>
-                <small>⭐⭐⭐⭐⭐ (5/5)</small>
-            </div>
-        </div>
     </div>
 
     <!-- PAGE 7: My Cart & Checkout -->
@@ -611,33 +567,117 @@
 </div>
 
 <script>
+    // Complete 54 Menu Items from Bagushi Steamboat & Grill Order Form
     const menuItems = [
-        { name: 'Sliced Beef', price: 12.00, img: 'https://via.placeholder.com/150?text=Sliced+Beef' },
-        { name: 'Chicken Slice', price: 10.00, img: 'https://via.placeholder.com/150?text=Marinated+Chicken' },
-        { name: 'Fishball Combo', price: 8.00, img: 'https://via.placeholder.com/150?text=Fishball+Combo' },
-        { name: 'Fresh Prawns', price: 15.00, img: 'https://via.placeholder.com/150?text=Prawns+Fresh' }
+        // Sup / Dapur
+        { id: 1, category: 'Sup / Dapur', name: 'Sup tomyam refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Tomypam+Soup' },
+        { id: 2, category: 'Sup / Dapur', name: 'Sup jepun (Shoyu) refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Shoyu+Soup' },
+        { id: 3, category: 'Sup / Dapur', name: 'Sup mala (pedas) refill', price: 5.00, img: 'https://via.placeholder.com/150?text=Mala+Soup' },
+        { id: 4, category: 'Sup / Dapur', name: 'BBQ pan', price: 5.00, img: 'https://via.placeholder.com/150?text=BBQ+Pan' },
+        { id: 5, category: 'Sup / Dapur', name: 'Steamboat pan', price: 5.00, img: 'https://via.placeholder.com/150?text=Steamboat+Pan' },
+        { id: 6, category: 'Sup / Dapur', name: 'Shabu Shabu hot pot', price: 1.00, img: 'https://via.placeholder.com/150?text=Hot+Pot' },
+
+        // Sos Pencicah
+        { id: 7, category: 'Sos Pencicah', name: 'Sos Bagushi original', price: 1.00, img: 'https://via.placeholder.com/150?text=Original+Sos' },
+        { id: 8, category: 'Sos Pencicah', name: 'Sos Bagushi spicy', price: 1.00, img: 'https://via.placeholder.com/150?text=Spicy+Sos' },
+        { id: 9, category: 'Sos Pencicah', name: 'Sos seafood', price: 1.00, img: 'https://via.placeholder.com/150?text=Seafood+Sos' },
+        { id: 10, category: 'Sos Pencicah', name: 'Sos yong tau fu (Sukiyaki)', price: 6.00, img: 'https://via.placeholder.com/150?text=Sukiyaki+Sos' },
+
+        // Daging
+        { id: 11, category: 'Daging', name: 'Daging ribeye', price: 6.00, img: 'https://via.placeholder.com/150?text=Ribeye' },
+        { id: 12, category: 'Daging', name: 'Daging brisket', price: 6.00, img: 'https://via.placeholder.com/150?text=Brisket' },
+        { id: 13, category: 'Daging', name: 'Daging Korea', price: 6.00, img: 'https://via.placeholder.com/150?text=Korea+Beef' },
+        { id: 14, category: 'Daging', name: 'Daging perap', price: 6.00, img: 'https://via.placeholder.com/150?text=Marinated+Beef' },
+        { id: 15, category: 'Daging', name: 'Daging black pepper', price: 5.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Beef' },
+
+        // Ayam
+        { id: 16, category: 'Ayam', name: 'Ayam fresh', price: 5.00, img: 'https://via.placeholder.com/150?text=Fresh+Chicken' },
+        { id: 17, category: 'Ayam', name: 'Ayam korea', price: 5.00, img: 'https://via.placeholder.com/150?text=Korea+Chicken' },
+        { id: 18, category: 'Ayam', name: 'Ayam perap', price: 5.00, img: 'https://via.placeholder.com/150?text=Marinated+Chicken' },
+        { id: 19, category: 'Ayam', name: 'Ayam black pepper', price: 4.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Chicken' },
+        { id: 20, category: 'Ayam', name: 'Lala', price: 6.00, img: 'https://via.placeholder.com/150?text=Lala' },
+
+        // Seafood
+        { id: 21, category: 'Seafood', name: 'Udang', price: 6.00, img: 'https://via.placeholder.com/150?text=Prawns' },
+        { id: 22, category: 'Seafood', name: 'Sotong', price: 1.50, img: 'https://via.placeholder.com/150?text=Sotong' },
+        { id: 23, category: 'Seafood', name: 'Telur ayam', price: 3.00, img: 'https://via.placeholder.com/150?text=Egg' },
+
+        // Bebola & Steamboat
+        { id: 24, category: 'Bebola & Steamboat', name: 'Tohu telur', price: 4.00, img: 'https://via.placeholder.com/150?text=Tofu' },
+        { id: 25, category: 'Bebola & Steamboat', name: 'Bebola daging', price: 4.00, img: 'https://via.placeholder.com/150?text=Beef+Ball' },
+        { id: 26, category: 'Bebola & Steamboat', name: 'Bebola ikan', price: 4.00, img: 'https://via.placeholder.com/150?text=Fish+Ball' },
+        { id: 27, category: 'Bebola & Steamboat', name: 'Crab stick', price: 4.00, img: 'https://via.placeholder.com/150?text=Crab+Stick' },
+        { id: 28, category: 'Bebola & Steamboat', name: 'Bebola sotong', price: 4.00, img: 'https://via.placeholder.com/150?text=Squid+Ball' },
+        { id: 29, category: 'Bebola & Steamboat', name: 'Tofu ikan', price: 1.50, img: 'https://via.placeholder.com/150?text=Fish+Tofu' },
+
+        // Mee
+        { id: 30, category: 'Mee', name: 'Nasi putih', price: 2.00, img: 'https://via.placeholder.com/150?text=White+Rice' },
+        { id: 31, category: 'Mee', name: 'Sohun', price: 2.00, img: 'https://via.placeholder.com/150?text=Sohun' },
+        { id: 32, category: 'Mee', name: 'Mee kuning', price: 2.00, img: 'https://via.placeholder.com/150?text=Yellow+Mee' },
+        { id: 33, category: 'Mee', name: 'Meggi', price: 2.00, img: 'https://via.placeholder.com/150?text=Meggi' },
+
+        // Sayur
+        { id: 34, category: 'Sayur', name: 'Kubis', price: 2.00, img: 'https://via.placeholder.com/150?text=Cabbage' },
+        { id: 35, category: 'Sayur', name: 'Sawi', price: 2.00, img: 'https://via.placeholder.com/150?text=Sawi' },
+        { id: 36, category: 'Sayur', name: 'Karot', price: 3.00, img: 'https://via.placeholder.com/150?text=Carrot' },
+        { id: 37, category: 'Sayur', name: 'Inoki', price: 3.00, img: 'https://via.placeholder.com/150?text=Enoki' },
+        { id: 38, category: 'Sayur', name: 'Chimeji', price: 3.00, img: 'https://via.placeholder.com/150?text=Shimeji' },
+
+        // Side Dish
+        { id: 39, category: 'Side Dish', name: 'Tepung tin siam', price: 5.00, img: 'https://via.placeholder.com/150?text=Side+Dish' },
+        { id: 40, category: 'Side Dish', name: 'French fries', price: 5.00, img: 'https://via.placeholder.com/150?text=French+Fries' },
+        { id: 41, category: 'Side Dish', name: 'Tembikai', price: 5.00, img: 'https://via.placeholder.com/150?text=Watermelon' },
+        { id: 42, category: 'Side Dish', name: 'Kek pisang', price: 5.00, img: 'https://via.placeholder.com/150?text=Banana+Cake' },
+        { id: 43, category: 'Side Dish', name: 'Nugget', price: 3.00, img: 'https://via.placeholder.com/150?text=Nuggets' },
+
+        // Minuman
+        { id: 44, category: 'Minuman', name: 'Oren', price: 3.00, img: 'https://via.placeholder.com/150?text=Orange+Drink' },
+        { id: 45, category: 'Minuman', name: 'Teh O ice', price: 3.00, img: 'https://via.placeholder.com/150?text=Teh+O+Ice' },
+        { id: 46, category: 'Minuman', name: 'Sirap', price: 6.00, img: 'https://via.placeholder.com/150?text=Sirap' },
+
+        // Alacarte Add On
+        { id: 47, category: 'Alacarte Add On', name: 'Set sayur + chedawan', price: 6.00, img: 'https://via.placeholder.com/150?text=Veg+Mushroom+Set' },
+        { id: 48, category: 'Alacarte Add On', name: 'Set mee + telur', price: 10.00, img: 'https://via.placeholder.com/150?text=Mee+Egg+Set' },
+        { id: 49, category: 'Alacarte Add On', name: 'Set bebola', price: 10.00, img: 'https://via.placeholder.com/150?text=Meatball+Set' },
+        { id: 50, category: 'Alacarte Add On', name: 'Set sayur + bb + mee + telur', price: 12.00, img: 'https://via.placeholder.com/150?text=Combo+Set' },
+        { id: 51, category: 'Alacarte Add On', name: 'Set seafood + ayam', price: 25.00, img: 'https://via.placeholder.com/150?text=Seafood+Chicken+Set' },
+
+        // Set Menu
+        { id: 52, category: 'Set Menu', name: 'Set Solo (1 Orang)', price: 45.00, img: 'https://via.placeholder.com/150?text=Set+Solo' },
+        { id: 53, category: 'Set Menu', name: 'Set Couple (2 Orang)', price: 75.00, img: 'https://via.placeholder.com/150?text=Set+Couple' },
+        { id: 54, category: 'Set Menu', name: 'Set Family (3-4 Orang)', price: 95.00, img: 'https://via.placeholder.com/150?text=Set+Family' }
     ];
 
     let cart = [];
     let currentDetailItem = null;
 
     window.onload = function() {
-        renderFoodGrid();
+        renderFullMenuList();
     };
 
-    function renderFoodGrid() {
-        const gridContainer = document.getElementById('foodGridContainer');
-        gridContainer.innerHTML = '';
-        menuItems.forEach(item => {
-            gridContainer.innerHTML += `
-                <div class="product-card">
-                    <i class="fa-regular fa-heart heart-icon"></i>
-                    <img src="${item.img}" alt="${item.name}" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}')">
-                    <p style="font-weight: bold; margin-top: 5px;">${item.name}</p>
-                    <small>RM ${item.price.toFixed(2)}</small>
-                    <button class="btn-add-quick" onclick="addToCart('${item.name}', ${item.price}, '${item.img}')">+ Add</button>
-                </div>
-            `;
+    // Render All 54 Items grouped by Category into Page 5
+    function renderFullMenuList() {
+        const container = document.getElementById('fullMenuListContainer');
+        container.innerHTML = '';
+
+        // Group items by category
+        const categories = [...new Set(menuItems.map(item => item.category))];
+
+        categories.forEach(cat => {
+            container.innerHTML += `<div class="category-header">${cat}</div>`;
+            const itemsInCat = menuItems.filter(item => item.category === cat);
+
+            itemsInCat.forEach(item => {
+                container.innerHTML += `
+                    <div class="menu-item-row">
+                        <div class="menu-item-info" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}', '${item.category}')" style="cursor:pointer; flex:1;">
+                            <h4>${item.id}. ${item.name}</h4>
+                            <small>RM ${item.price.toFixed(2)}</small>
+                        </div>
+                        <button class="btn-add-menu" onclick="addToCart('${item.name}', ${item.price}, '${item.img}')">+ Add</button>
+                    </div>
+                `;
+            });
         });
     }
 
@@ -691,6 +731,7 @@
         goToPage(4);
     }
 
+    // Live Search across all 54 items
     function filterMenu(query) {
         const searchResultsBox = document.getElementById('searchResults');
         const searchResultList = document.getElementById('searchResultList');
@@ -717,15 +758,12 @@
 
         filtered.forEach(item => {
             searchResultList.innerHTML += `
-                <div class="category-card" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}')" style="padding: 10px 15px; margin-bottom: 8px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <img src="${item.img}" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
-                        <div>
-                            <span style="font-size: 0.9rem; font-weight: bold;">${item.name}</span><br>
-                            <small style="color: #666;">RM ${item.price.toFixed(2)}</small>
-                        </div>
+                <div class="menu-item-row" style="background:#fafafa; padding:8px 12px; border-radius:8px;">
+                    <div onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}', '${item.category}')" style="cursor:pointer; flex:1;">
+                        <span style="font-size: 0.9rem; font-weight: bold;">${item.id}. ${item.name}</span><br>
+                        <small style="color: #666;">RM ${item.price.toFixed(2)} (${item.category})</small>
                     </div>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i>
+                    <button class="btn-add-menu" onclick="addToCart('${item.name}', ${item.price}, '${item.img}')">+ Add</button>
                 </div>
             `;
         });
@@ -742,10 +780,11 @@
         alert(`${name} has been added to cart!`);
     }
 
-    function openProductDetail(name, price, img) {
+    function openProductDetail(name, price, img, category) {
         currentDetailItem = { name: name, price: price, img: img };
         document.getElementById('detailName').innerText = name;
         document.getElementById('detailPrice').innerText = 'Price: RM ' + price.toFixed(2);
+        document.getElementById('detailCategory').innerText = 'Category: ' + category;
         document.getElementById('detailImg').src = img;
         document.getElementById('specialRequest').value = '';
         goToPage(6);
