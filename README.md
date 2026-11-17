@@ -170,15 +170,6 @@
         }
 
         /* Menu List Styles */
-        .category-header {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #d9534f;
-            margin: 15px 0 8px 0;
-            border-bottom: 2px solid #f2f2f2;
-            padding-bottom: 4px;
-        }
-
         .menu-item-row {
             display: flex;
             justify-content: space-between;
@@ -208,6 +199,41 @@
 
         .btn-add-menu:hover {
             background: #444;
+        }
+
+        /* Category Grid Cards on Page 4 */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+            padding-bottom: 15px;
+        }
+
+        .cat-card {
+            background: #fdfdfd;
+            border: 1.5px solid #222;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .cat-card:hover {
+            background: #222;
+            color: #fff;
+        }
+
+        .cat-card i {
+            font-size: 1.25rem;
         }
 
         /* Cart Page Styles */
@@ -373,10 +399,10 @@
         <button class="btn-primary" onclick="confirmTable()">View Menu</button>
     </div>
 
-    <!-- PAGE 4: Search Menu -->
+    <!-- PAGE 4: Menu Categories Selection (All 12 Categories) -->
     <div id="page4" class="page">
         <div class="top-bar">
-            <span style="font-size:0.8rem; color:#666;">Menu Search</span>
+            <span style="font-size:0.8rem; color:#666;">Menu Categories</span>
             <i class="fa-solid fa-cart-shopping" onclick="goToPage(7)" style="font-size:1.3rem;">
                 <span class="cart-badge total-cart-count">0</span>
             </i>
@@ -389,21 +415,68 @@
             <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
         </div>
 
-        <div id="defaultCategories">
-            <p style="font-weight: bold; margin-bottom: 10px;">Full Menu Categories</p>
-            <div class="category-card" onclick="goToPage(5)" style="display:flex; justify-content:space-between; border:1.5px solid #222; border-radius:12px; padding:15px; margin-bottom:12px; cursor:pointer; font-weight:bold;">
-                <span>Browse All 54 Menu Items</span>
-                <i class="fa-solid fa-chevron-right"></i>
+        <div id="defaultCategories" style="flex: 1; overflow-y: auto; padding-bottom: 10px;">
+            <p style="font-weight: bold; margin-bottom: 8px;">Select Category:</p>
+            <div class="cat-grid">
+                <div class="cat-card" onclick="filterByCategory('Sup / Dapur')">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <span>Sup / Dapur</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Sos Pencicah')">
+                    <i class="fa-solid fa-bottle-droplet"></i>
+                    <span>Sos Pencicah</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Daging')">
+                    <i class="fa-solid fa-bacon"></i>
+                    <span>Daging</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Ayam')">
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    <span>Ayam</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Seafood')">
+                    <i class="fa-solid fa-fish"></i>
+                    <span>Seafood</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Bebola & Steamboat')">
+                    <i class="fa-solid fa-circle-dot"></i>
+                    <span>Bebola & Steamboat</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Mee')">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <span>Mee</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Sayur')">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>Sayur</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Side Dish')">
+                    <i class="fa-solid fa-french-fries"></i>
+                    <span>Side Dish</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Minuman')">
+                    <i class="fa-solid fa-glass-water"></i>
+                    <span>Minuman</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Alacarte Add On')">
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Alacarte Add On</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Set Menu')">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Set Menu</span>
+                </div>
             </div>
         </div>
+        <button class="btn-primary" style="margin-top: 10px;" onclick="filterByCategory('All')">View All Menu Items</button>
     </div>
 
-    <!-- PAGE 5: Full Menu List (All 54 Items) -->
+    <!-- PAGE 5: Filtered Menu List -->
     <div id="page5" class="page">
         <div class="top-bar">
             <div style="display:flex; align-items:center; gap:8px;">
                 <i class="fa-solid fa-chevron-left" onclick="goToPage(4)"></i>
-                <span class="header-title">Full Menu List</span>
+                <span id="page5Title" class="header-title">Menu List</span>
             </div>
             <div>
                 <i class="fa-solid fa-bag-shopping" onclick="goToPage(7)" style="font-size: 1.2rem; cursor: pointer;">
@@ -413,7 +486,7 @@
         </div>
 
         <div id="fullMenuListContainer" style="flex:1; overflow-y:auto; padding-bottom: 20px;">
-            <!-- Generated dynamically via JavaScript -->
+            <!-- Generated dynamically -->
         </div>
 
         <button class="btn-primary" onclick="goToPage(7)">Go to Cart (<span class="total-cart-count">0</span>)</button>
@@ -567,51 +640,50 @@
 </div>
 
 <script>
-    // Complete 54 Menu Items from Bagushi Steamboat & Grill Order Form
     const menuItems = [
         // Sup / Dapur
         { id: 1, category: 'Sup / Dapur', name: 'Sup tomyam refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Tomypam+Soup' },
         { id: 2, category: 'Sup / Dapur', name: 'Sup jepun (Shoyu) refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Shoyu+Soup' },
-        { id: 3, category: 'Sup / Dapur', name: 'Sup mala (pedas) refill', price: 5.00, img: 'https://via.placeholder.com/150?text=Mala+Soup' },
+        { id: 3, category: 'Sup / Dapur', name: 'Sup mala (pedas) refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Mala+Soup' },
         { id: 4, category: 'Sup / Dapur', name: 'BBQ pan', price: 5.00, img: 'https://via.placeholder.com/150?text=BBQ+Pan' },
         { id: 5, category: 'Sup / Dapur', name: 'Steamboat pan', price: 5.00, img: 'https://via.placeholder.com/150?text=Steamboat+Pan' },
-        { id: 6, category: 'Sup / Dapur', name: 'Shabu Shabu hot pot', price: 1.00, img: 'https://via.placeholder.com/150?text=Hot+Pot' },
+        { id: 6, category: 'Sup / Dapur', name: 'Shabu Shabu hot pot', price: 5.00, img: 'https://via.placeholder.com/150?text=Hot+Pot' },
 
         // Sos Pencicah
         { id: 7, category: 'Sos Pencicah', name: 'Sos Bagushi original', price: 1.00, img: 'https://via.placeholder.com/150?text=Original+Sos' },
         { id: 8, category: 'Sos Pencicah', name: 'Sos Bagushi spicy', price: 1.00, img: 'https://via.placeholder.com/150?text=Spicy+Sos' },
         { id: 9, category: 'Sos Pencicah', name: 'Sos seafood', price: 1.00, img: 'https://via.placeholder.com/150?text=Seafood+Sos' },
-        { id: 10, category: 'Sos Pencicah', name: 'Sos yong tau fu (Sukiyaki)', price: 6.00, img: 'https://via.placeholder.com/150?text=Sukiyaki+Sos' },
+        { id: 10, category: 'Sos Pencicah', name: 'Sos yong tau fu (Sukiyaki)', price: 1.00, img: 'https://via.placeholder.com/150?text=Sukiyaki+Sos' },
 
         // Daging
         { id: 11, category: 'Daging', name: 'Daging ribeye', price: 6.00, img: 'https://via.placeholder.com/150?text=Ribeye' },
         { id: 12, category: 'Daging', name: 'Daging brisket', price: 6.00, img: 'https://via.placeholder.com/150?text=Brisket' },
         { id: 13, category: 'Daging', name: 'Daging Korea', price: 6.00, img: 'https://via.placeholder.com/150?text=Korea+Beef' },
         { id: 14, category: 'Daging', name: 'Daging perap', price: 6.00, img: 'https://via.placeholder.com/150?text=Marinated+Beef' },
-        { id: 15, category: 'Daging', name: 'Daging black pepper', price: 5.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Beef' },
+        { id: 15, category: 'Daging', name: 'Daging black pepper', price: 6.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Beef' },
 
         // Ayam
         { id: 16, category: 'Ayam', name: 'Ayam fresh', price: 5.00, img: 'https://via.placeholder.com/150?text=Fresh+Chicken' },
         { id: 17, category: 'Ayam', name: 'Ayam korea', price: 5.00, img: 'https://via.placeholder.com/150?text=Korea+Chicken' },
         { id: 18, category: 'Ayam', name: 'Ayam perap', price: 5.00, img: 'https://via.placeholder.com/150?text=Marinated+Chicken' },
-        { id: 19, category: 'Ayam', name: 'Ayam black pepper', price: 4.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Chicken' },
-        { id: 20, category: 'Ayam', name: 'Lala', price: 6.00, img: 'https://via.placeholder.com/150?text=Lala' },
+        { id: 19, category: 'Ayam', name: 'Ayam black pepper', price: 5.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Chicken' },
 
         // Seafood
+        { id: 20, category: 'Seafood', name: 'Lala', price: 4.00, img: 'https://via.placeholder.com/150?text=Lala' },
         { id: 21, category: 'Seafood', name: 'Udang', price: 6.00, img: 'https://via.placeholder.com/150?text=Prawns' },
-        { id: 22, category: 'Seafood', name: 'Sotong', price: 1.50, img: 'https://via.placeholder.com/150?text=Sotong' },
-        { id: 23, category: 'Seafood', name: 'Telur ayam', price: 3.00, img: 'https://via.placeholder.com/150?text=Egg' },
+        { id: 22, category: 'Seafood', name: 'Sotong', price: 6.00, img: 'https://via.placeholder.com/150?text=Sotong' },
 
         // Bebola & Steamboat
-        { id: 24, category: 'Bebola & Steamboat', name: 'Tohu telur', price: 4.00, img: 'https://via.placeholder.com/150?text=Tofu' },
+        { id: 23, category: 'Bebola & Steamboat', name: 'Telur ayam', price: 1.50, img: 'https://via.placeholder.com/150?text=Egg' },
+        { id: 24, category: 'Bebola & Steamboat', name: 'Tohu telur', price: 3.00, img: 'https://via.placeholder.com/150?text=Tofu' },
         { id: 25, category: 'Bebola & Steamboat', name: 'Bebola daging', price: 4.00, img: 'https://via.placeholder.com/150?text=Beef+Ball' },
         { id: 26, category: 'Bebola & Steamboat', name: 'Bebola ikan', price: 4.00, img: 'https://via.placeholder.com/150?text=Fish+Ball' },
         { id: 27, category: 'Bebola & Steamboat', name: 'Crab stick', price: 4.00, img: 'https://via.placeholder.com/150?text=Crab+Stick' },
         { id: 28, category: 'Bebola & Steamboat', name: 'Bebola sotong', price: 4.00, img: 'https://via.placeholder.com/150?text=Squid+Ball' },
-        { id: 29, category: 'Bebola & Steamboat', name: 'Tofu ikan', price: 1.50, img: 'https://via.placeholder.com/150?text=Fish+Tofu' },
+        { id: 29, category: 'Bebola & Steamboat', name: 'Tohu ikan', price: 4.00, img: 'https://via.placeholder.com/150?text=Fish+Tofu' },
 
         // Mee
-        { id: 30, category: 'Mee', name: 'Nasi putih', price: 2.00, img: 'https://via.placeholder.com/150?text=White+Rice' },
+        { id: 30, category: 'Mee', name: 'Nasi putih', price: 1.50, img: 'https://via.placeholder.com/150?text=White+Rice' },
         { id: 31, category: 'Mee', name: 'Sohun', price: 2.00, img: 'https://via.placeholder.com/150?text=Sohun' },
         { id: 32, category: 'Mee', name: 'Mee kuning', price: 2.00, img: 'https://via.placeholder.com/150?text=Yellow+Mee' },
         { id: 33, category: 'Mee', name: 'Meggi', price: 2.00, img: 'https://via.placeholder.com/150?text=Meggi' },
@@ -619,55 +691,57 @@
         // Sayur
         { id: 34, category: 'Sayur', name: 'Kubis', price: 2.00, img: 'https://via.placeholder.com/150?text=Cabbage' },
         { id: 35, category: 'Sayur', name: 'Sawi', price: 2.00, img: 'https://via.placeholder.com/150?text=Sawi' },
-        { id: 36, category: 'Sayur', name: 'Karot', price: 3.00, img: 'https://via.placeholder.com/150?text=Carrot' },
+        { id: 36, category: 'Sayur', name: 'Karot', price: 2.00, img: 'https://via.placeholder.com/150?text=Carrot' },
         { id: 37, category: 'Sayur', name: 'Inoki', price: 3.00, img: 'https://via.placeholder.com/150?text=Enoki' },
         { id: 38, category: 'Sayur', name: 'Chimeji', price: 3.00, img: 'https://via.placeholder.com/150?text=Shimeji' },
 
         // Side Dish
-        { id: 39, category: 'Side Dish', name: 'Tepung tin siam', price: 5.00, img: 'https://via.placeholder.com/150?text=Side+Dish' },
+        { id: 39, category: 'Side Dish', name: 'Tepung tin siam', price: 3.00, img: 'https://via.placeholder.com/150?text=Side+Dish' },
         { id: 40, category: 'Side Dish', name: 'French fries', price: 5.00, img: 'https://via.placeholder.com/150?text=French+Fries' },
         { id: 41, category: 'Side Dish', name: 'Tembikai', price: 5.00, img: 'https://via.placeholder.com/150?text=Watermelon' },
         { id: 42, category: 'Side Dish', name: 'Kek pisang', price: 5.00, img: 'https://via.placeholder.com/150?text=Banana+Cake' },
-        { id: 43, category: 'Side Dish', name: 'Nugget', price: 3.00, img: 'https://via.placeholder.com/150?text=Nuggets' },
+        { id: 43, category: 'Side Dish', name: 'Nugget', price: 5.00, img: 'https://via.placeholder.com/150?text=Nuggets' },
 
         // Minuman
         { id: 44, category: 'Minuman', name: 'Oren', price: 3.00, img: 'https://via.placeholder.com/150?text=Orange+Drink' },
         { id: 45, category: 'Minuman', name: 'Teh O ice', price: 3.00, img: 'https://via.placeholder.com/150?text=Teh+O+Ice' },
-        { id: 46, category: 'Minuman', name: 'Sirap', price: 6.00, img: 'https://via.placeholder.com/150?text=Sirap' },
+        { id: 46, category: 'Minuman', name: 'Sirap', price: 3.00, img: 'https://via.placeholder.com/150?text=Sirap' },
 
         // Alacarte Add On
         { id: 47, category: 'Alacarte Add On', name: 'Set sayur + chedawan', price: 6.00, img: 'https://via.placeholder.com/150?text=Veg+Mushroom+Set' },
-        { id: 48, category: 'Alacarte Add On', name: 'Set mee + telur', price: 10.00, img: 'https://via.placeholder.com/150?text=Mee+Egg+Set' },
+        { id: 48, category: 'Alacarte Add On', name: 'Set mee + telur', price: 6.00, img: 'https://via.placeholder.com/150?text=Mee+Egg+Set' },
         { id: 49, category: 'Alacarte Add On', name: 'Set bebola', price: 10.00, img: 'https://via.placeholder.com/150?text=Meatball+Set' },
-        { id: 50, category: 'Alacarte Add On', name: 'Set sayur + bb + mee + telur', price: 12.00, img: 'https://via.placeholder.com/150?text=Combo+Set' },
-        { id: 51, category: 'Alacarte Add On', name: 'Set seafood + ayam', price: 25.00, img: 'https://via.placeholder.com/150?text=Seafood+Chicken+Set' },
+        { id: 50, category: 'Alacarte Add On', name: 'Set sayur + bb + mee + telur', price: 10.00, img: 'https://via.placeholder.com/150?text=Combo+Set' },
+        { id: 51, category: 'Alacarte Add On', name: 'Set seafood + ayam', price: 12.00, img: 'https://via.placeholder.com/150?text=Seafood+Chicken+Set' },
 
         // Set Menu
-        { id: 52, category: 'Set Menu', name: 'Set Solo (1 Orang)', price: 45.00, img: 'https://via.placeholder.com/150?text=Set+Solo' },
-        { id: 53, category: 'Set Menu', name: 'Set Couple (2 Orang)', price: 75.00, img: 'https://via.placeholder.com/150?text=Set+Couple' },
-        { id: 54, category: 'Set Menu', name: 'Set Family (3-4 Orang)', price: 95.00, img: 'https://via.placeholder.com/150?text=Set+Family' }
+        { id: 52, category: 'Set Menu', name: 'Set Solo (1 Orang)', price: 25.00, img: 'https://via.placeholder.com/150?text=Set+Solo' },
+        { id: 53, category: 'Set Menu', name: 'Set Couple (2 Orang)', price: 45.00, img: 'https://via.placeholder.com/150?text=Set+Couple' },
+        { id: 54, category: 'Set Menu', name: 'Set Family (3-4 Orang)', price: 75.00, img: 'https://via.placeholder.com/150?text=Set+Family' }
     ];
 
     let cart = [];
     let currentDetailItem = null;
 
-    window.onload = function() {
-        renderFullMenuList();
-    };
-
-    // Render All 54 Items grouped by Category into Page 5
-    function renderFullMenuList() {
+    // Filter menu by specific category when clicked on Page 4
+    function filterByCategory(categoryName) {
         const container = document.getElementById('fullMenuListContainer');
+        const page5Title = document.getElementById('page5Title');
         container.innerHTML = '';
 
-        // Group items by category
-        const categories = [...new Set(menuItems.map(item => item.category))];
+        let filteredItems = [];
+        if (categoryName === 'All') {
+            filteredItems = menuItems;
+            page5Title.innerText = 'All Menu Items';
+        } else {
+            filteredItems = menuItems.filter(item => item.category === categoryName);
+            page5Title.innerText = categoryName;
+        }
 
-        categories.forEach(cat => {
-            container.innerHTML += `<div class="category-header">${cat}</div>`;
-            const itemsInCat = menuItems.filter(item => item.category === cat);
-
-            itemsInCat.forEach(item => {
+        if (filteredItems.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">No items found in this category.</p>';
+        } else {
+            filteredItems.forEach(item => {
                 container.innerHTML += `
                     <div class="menu-item-row">
                         <div class="menu-item-info" onclick="openProductDetail('${item.name}', ${item.price}, '${item.img}', '${item.category}')" style="cursor:pointer; flex:1;">
@@ -678,7 +752,9 @@
                     </div>
                 `;
             });
-        });
+        }
+
+        goToPage(5);
     }
 
     function togglePasswordVisibility() {
@@ -731,7 +807,6 @@
         goToPage(4);
     }
 
-    // Live Search across all 54 items
     function filterMenu(query) {
         const searchResultsBox = document.getElementById('searchResults');
         const searchResultList = document.getElementById('searchResultList');
