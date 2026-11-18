@@ -90,12 +90,6 @@
             border-radius: 12px;
             margin-bottom: 15px;
             background-color: #e2e2e2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 3rem;
-            border: 1.5px dashed #ccc;
         }
 
         .btn-primary {
@@ -152,7 +146,42 @@
             cursor: pointer;
         }
 
-        /* Cart Page Styles based on Design */
+        /* Category Grid Cards with Icons on Page 4 */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+            padding-bottom: 15px;
+        }
+
+        .cat-card {
+            background: #fff;
+            border: 1.5px solid #222;
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .cat-card:hover {
+            background: #222;
+            color: #fff;
+        }
+
+        .cat-card i {
+            font-size: 1.3rem;
+        }
+
+        /* Cart Page Styles */
         .cart-card-container {
             background: #fff;
             border-radius: 15px;
@@ -202,7 +231,7 @@
             font-weight: bold;
         }
 
-        /* Order Status Page Styles based on Design */
+        /* Order Status Page Styles */
         .success-card {
             background: #fff;
             border-radius: 15px;
@@ -262,7 +291,7 @@
 
 <div class="app-screen">
 
-    <!-- PAGE 1: Welcome Screen (Based on Design 1)[cite: 6] -->
+    <!-- PAGE 1: Welcome Screen -->
     <div id="page1" class="page active">
         <div class="top-bar">
             <i class="fa-solid fa-bars"></i>
@@ -273,41 +302,15 @@
             </div>
         </div>
         
-        <!-- Image placeholder atau gambar kedai -->
-        <div class="img-header">
-            <img src="bagushi.jpg.png" style="width:100%; height:100%; object-fit:cover; border-radius:12px;" onerror="this.style.display='none'">
-            <i class="fa-regular fa-image" style="position: absolute;"></i>
-        </div>
+        <img src="bagushi.jpg.png" class="img-header" alt="Bagushi Steamboat & Grill Logo">
 
-        <h1 class="title-large" style="font-size: 1.6rem; line-height: 1.2; margin-bottom: 10px;">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
-        <p style="text-align: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 30px;">Welcome!</p>
+        <h1 class="title-large" style="font-size: 1.4rem; line-height: 1.2; margin-bottom: 10px; text-align: center;">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
+        <p style="text-align: center; font-size: 1.6rem; font-weight: bold; margin-bottom: 30px;">Welcome!</p>
         
-        <button class="btn-primary" onclick="goToPage(2)">Start Ordering</button>
+        <button class="btn-primary" onclick="goToPage(3)">Start Ordering</button>
     </div>
 
-    <!-- PAGE 2: Sign In Form -->
-    <div id="page2" class="page">
-        <div class="top-bar">
-            <i class="fa-solid fa-chevron-left" onclick="goToPage(1)"></i>
-            <span class="header-title">Sign In</span>
-            <i></i>
-        </div>
-        <h1 class="title-large" style="font-size: 1.3rem; margin-bottom: 20px;">Customer Sign In</h1>
-        
-        <input type="text" id="loginEmail" class="form-input" placeholder="Name / Email" required>
-        
-        <div class="password-container" style="position:relative; width:100%;">
-            <input type="password" id="loginPassword" class="form-input" placeholder="Password" required style="padding-right: 40px; margin-bottom: 0;">
-            <i class="fa-solid fa-eye toggle-password" id="togglePassword" onclick="togglePasswordVisibility()" style="position:absolute; right:15px; top:40%; transform:translateY(-50%); cursor:pointer; color:#777;"></i>
-        </div>
-        
-        <button class="btn-primary" style="margin-top: 25px;" onclick="handleSignIn()">Continue</button>
-        <div style="text-align: center; margin-top: 15px;">
-            <small onclick="goToPage(9)" style="cursor: pointer; text-decoration: underline; color: #666;">(Staff / Kitchen Dashboard - Page 9)</small>
-        </div>
-    </div>
-
-    <!-- PAGE 3: Confirm Table Number (Based on Design 2)[cite: 7] -->
+    <!-- PAGE 3: Confirm Table Number -->
     <div id="page3" class="page">
         <div class="top-bar">
             <i class="fa-solid fa-bars"></i>
@@ -318,22 +321,19 @@
             </div>
         </div>
         
-        <div class="img-header">
-            <img src="bagushi.jpg.png" style="width:100%; height:100%; object-fit:cover; border-radius:12px;" onerror="this.style.display='none'">
-            <i class="fa-regular fa-image" style="position: absolute;"></i>
-        </div>
+        <img src="bagushi.jpg.png" class="img-header" alt="Bagushi Steamboat & Grill">
 
-        <h2 class="title-large" style="margin-bottom: 5px;">Confirm Your Table</h2>
-        <p class="subtitle" style="font-size: 0.85rem; margin-bottom: 20px;">Your table number has been detected from the QR code</p>
+        <h2 class="title-large" style="font-size: 1.3rem; margin-bottom: 5px; text-align: center;">Confirm Your Table</h2>
+        <p class="subtitle" style="font-size: 0.85rem; margin-bottom: 20px; text-align: center;">Your table number has been detected from the QR code</p>
         
         <div style="background: #fff; border: 1.5px solid #222; border-radius: 15px; padding: 15px; text-align: center; margin-bottom: 15px;">
             <label style="font-size: 0.9rem; font-weight: bold; display: block; margin-bottom: 8px;">Table Number</label>
             <select id="selectMeja" class="form-input" style="text-align: center; margin-bottom: 0;">
-                <option value="Table 05">05</option>
-                <option value="Table 01">01</option>
-                <option value="Table 02">02</option>
-                <option value="Table 08">08</option>
-                <option value="Table 12">12</option>
+                <option value="Table 05">Table 05</option>
+                <option value="Table 01">Table 01</option>
+                <option value="Table 02">Table 02</option>
+                <option value="Table 08">Table 08</option>
+                <option value="Table 12">Table 12</option>
             </select>
         </div>
         
@@ -342,7 +342,7 @@
         <button class="btn-primary" onclick="confirmTable()">Confirm</button>
     </div>
 
-    <!-- PAGE 4: Menu Categories Selection -->
+    <!-- PAGE 4: Menu Categories Selection with Icons -->
     <div id="page4" class="page">
         <div class="top-bar">
             <span style="font-size:0.8rem; color:#666;">Menu Categories</span>
@@ -360,19 +360,55 @@
 
         <div id="defaultCategories" style="flex: 1; overflow-y: auto; padding-bottom: 10px;">
             <p style="font-weight: bold; margin-bottom: 8px;">Select Category:</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Sup / Dapur')">Sup / Dapur</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Sos Pencicah')">Sos Pencicah</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Daging')">Daging</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Ayam')">Ayam</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Seafood')">Seafood</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Bebola & Steamboat')">Bebola & Steamboat</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Mee')">Mee</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Sayur')">Sayur</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Side Dish')">Side Dish</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Minuman')">Minuman</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Alacarte Add On')">Alacarte Add On</div>
-                <div class="form-input" style="text-align:center; cursor:pointer; margin-bottom:0; padding:15px;" onclick="filterByCategory('Set Menu')">Set Menu</div>
+            <div class="cat-grid">
+                <div class="cat-card" onclick="filterByCategory('Sup / Dapur')">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <span>Sup / Dapur</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Sos Pencicah')">
+                    <i class="fa-solid fa-bottle-droplet"></i>
+                    <span>Sos Pencicah</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Daging')">
+                    <i class="fa-solid fa-bacon"></i>
+                    <span>Daging</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Ayam')">
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    <span>Ayam</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Seafood')">
+                    <i class="fa-solid fa-fish"></i>
+                    <span>Seafood</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Bebola & Steamboat')">
+                    <i class="fa-solid fa-circle-dot"></i>
+                    <span>Bebola & Steamboat</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Mee')">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <span>Mee</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Sayur')">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>Sayur</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Side Dish')">
+                    <i class="fa-solid fa-burger"></i>
+                    <span>Side Dish</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Minuman')">
+                    <i class="fa-solid fa-glass-water"></i>
+                    <span>Minuman</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Alacarte Add On')">
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Alacarte Add On</span>
+                </div>
+                <div class="cat-card" onclick="filterByCategory('Set Menu')">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Set Menu</span>
+                </div>
             </div>
         </div>
         <button class="btn-primary" style="margin-top: 10px;" onclick="filterByCategory('All')">View All Menu Items</button>
@@ -422,7 +458,7 @@
         <button class="btn-primary" onclick="addCurrentDetailToCart()">Add to Cart</button>
     </div>
 
-    <!-- PAGE 7: My Cart & Checkout (Based on Design 3)[cite: 8] -->
+    <!-- PAGE 7: My Cart & Checkout -->
     <div id="page7" class="page">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
             <i class="fa-solid fa-chevron-left" onclick="goToPage(5)"></i>
@@ -440,7 +476,6 @@
 
         <p style="font-weight: bold; margin-bottom: 10px;">Your Order</p>
 
-        <!-- Dynamic Cart Items Container -->
         <div id="cartList" style="flex: 1; overflow-y: auto; margin-bottom: 15px;"></div>
 
         <div style="background: #fff; padding: 15px; border-radius: 12px; margin-top: auto;">
@@ -452,7 +487,7 @@
         </div>
     </div>
 
-    <!-- PAGE 8: Customer Order Status (Based on Design 4)[cite: 9] -->
+    <!-- PAGE 8: Customer Order Status -->
     <div id="page8" class="page">
         <div class="top-bar" style="margin-bottom: 15px;">
             <i class="fa-solid fa-chevron-left" onclick="goToPage(7)"></i>
@@ -460,7 +495,6 @@
             <i></i>
         </div>
 
-        <!-- Success Notification Card -->
         <div class="success-card">
             <div class="success-icon">
                 <i class="fa-solid fa-check"></i>
@@ -665,33 +699,6 @@
         });
 
         goToPage(5);
-    }
-
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('loginPassword');
-        const toggleIcon = document.getElementById('togglePassword');
-        
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.remove('fa-eye');
-            toggleIcon.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.remove('fa-eye-slash');
-            toggleIcon.classList.add('fa-eye');
-        }
-    }
-
-    function handleSignIn() {
-        const emailInput = document.getElementById('loginEmail').value.trim();
-        const passwordInput = document.getElementById('loginPassword').value.trim();
-
-        if (emailInput === '' || passwordInput === '') {
-            alert('Please fill in both Name/Email and Password before signing in!');
-            return;
-        }
-
-        goToPage(3);
     }
 
     function goToPage(pageNumber) {
