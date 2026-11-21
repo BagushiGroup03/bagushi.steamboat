@@ -128,7 +128,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
             border-bottom: 1px solid #ddd;
             background: #fff;
             padding: 10px;
@@ -285,6 +284,33 @@
             background: #000;
             color: #fff;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .badge {
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        .badge-done { background: #d4edda; color: #155724; }
+        .badge-progress { background: #fff3cd; color: #856404; }
+        .badge-pending { background: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
