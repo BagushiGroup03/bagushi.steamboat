@@ -22,7 +22,6 @@
             color: #222;
         }
 
-        /* Mobile App Frame Container */
         .app-screen {
             width: 100%;
             max-width: 414px;
@@ -36,7 +35,6 @@
             flex-direction: column;
         }
 
-        /* View Pages Controller */
         .page {
             display: none;
             flex-direction: column;
@@ -55,7 +53,6 @@
             display: flex;
         }
 
-        /* Header Components */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -82,7 +79,6 @@
             font-weight: bold;
         }
 
-        /* Common Design Elements */
         .img-header {
             width: 100%;
             height: 180px;
@@ -123,7 +119,6 @@
             font-size: 1rem;
         }
 
-        /* Menu List Styles */
         .menu-item-row {
             display: flex;
             justify-content: space-between;
@@ -145,7 +140,6 @@
             cursor: pointer;
         }
 
-        /* Category Grid Cards with Icons on Page 4 */
         .cat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -180,7 +174,6 @@
             font-size: 1.3rem;
         }
 
-        /* Cart Page Styles */
         .cart-card-container {
             background: #fff;
             border-radius: 15px;
@@ -230,7 +223,6 @@
             font-weight: bold;
         }
 
-        /* Order Status Page Styles */
         .success-card {
             background: #fff;
             border-radius: 15px;
@@ -491,7 +483,6 @@
             <h2 style="font-size: 1.3rem;">My cart</h2>
         </div>
 
-        <!-- Table Number Card -->
         <div class="cart-card-container">
             <div style="font-size: 2rem;"><i class="fa-solid fa-chair"></i></div>
             <div>
