@@ -174,6 +174,29 @@
             font-size: 1.3rem;
         }
 
+        .set-includes-box {
+            background: #fff;
+            border: 1.5px solid #ddd;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+        }
+
+        .set-includes-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #222;
+        }
+
+        .set-includes-list {
+            list-style: disc;
+            padding-left: 18px;
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
         .cart-card-container {
             background: #fff;
             border-radius: 15px;
@@ -463,14 +486,20 @@
         </div>
 
         <h2 id="detailName" style="margin-bottom: 10px;">Item Name</h2>
-        <div style="position: relative; margin-bottom: 15px;">
-            <img id="detailImg" src="https://via.placeholder.com/350x200?text=Bagushi+Menu" class="img-header" style="height: 180px;">
+        <div style="position: relative; margin-bottom: 12px;">
+            <img id="detailImg" src="bagushi.jpg.png" class="img-header" style="height: 170px; margin-bottom: 0;">
         </div>
 
-        <p id="detailPrice" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">Price: RM 0.00</p>
-        <p id="detailCategory" style="color: #666; font-size: 0.9rem; margin-bottom: 15px;"></p>
+        <!-- Set Contents Shown Below Image -->
+        <div id="setIncludesContainer" class="set-includes-box" style="display: none;">
+            <div class="set-includes-title">Makanan Dalam Set:</div>
+            <ul id="setIncludesList" class="set-includes-list"></ul>
+        </div>
 
-        <label style="font-weight: bold; display: block; margin-top: 10px; margin-bottom: 5px;">Special Request:</label>
+        <p id="detailPrice" style="font-weight: bold; font-size: 1.1rem; margin-bottom: 4px;">Price: RM 0.00</p>
+        <p id="detailCategory" style="color: #666; font-size: 0.9rem; margin-bottom: 14px;"></p>
+
+        <label style="font-weight: bold; display: block; margin-bottom: 5px;">Special Request:</label>
         <input type="text" id="specialRequest" class="form-input" placeholder="E.g., Less spicy / Extra soup">
 
         <button class="btn-primary" onclick="addCurrentDetailToCart()">Add to Cart</button>
@@ -617,73 +646,116 @@
 </div>
 
 <script>
-    const menuItems = [
-        { id: 1, category: 'Sup / Dapur', name: 'Sup tomyam refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Tomypam+Soup' },
-        { id: 2, category: 'Sup / Dapur', name: 'Sup jepun (Shoyu) refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Shoyu+Soup' },
-        { id: 3, category: 'Sup / Dapur', name: 'Sup mala (pedas) refill', price: 3.00, img: 'https://via.placeholder.com/150?text=Mala+Soup' },
-        { id: 4, category: 'Sup / Dapur', name: 'BBQ pan', price: 5.00, img: 'https://via.placeholder.com/150?text=BBQ+Pan' },
-        { id: 5, category: 'Sup / Dapur', name: 'Steamboat pan', price: 5.00, img: 'https://via.placeholder.com/150?text=Steamboat+Pan' },
-        { id: 6, category: 'Sup / Dapur', name: 'Shabu Shabu hot pot', price: 5.00, img: 'https://via.placeholder.com/150?text=Hot+Pot' },
+    const rawMenuItems = [
+        { id: 1, category: 'Sup / Dapur', name: 'Sup tomyam refill', price: 3.00 },
+        { id: 2, category: 'Sup / Dapur', name: 'Sup jepun (Shoyu) refill', price: 3.00 },
+        { id: 3, category: 'Sup / Dapur', name: 'Sup mala (pedas) refill', price: 3.00 },
+        { id: 4, category: 'Sup / Dapur', name: 'BBQ pan', price: 5.00 },
+        { id: 5, category: 'Sup / Dapur', name: 'Steamboat pan', price: 5.00 },
+        { id: 6, category: 'Sup / Dapur', name: 'Shabu Shabu hot pot', price: 5.00 },
 
-        { id: 7, category: 'Sos Pencicah', name: 'Sos Bagushi original', price: 1.00, img: 'https://via.placeholder.com/150?text=Original+Sos' },
-        { id: 8, category: 'Sos Pencicah', name: 'Sos Bagushi spicy', price: 1.00, img: 'https://via.placeholder.com/150?text=Spicy+Sos' },
-        { id: 9, category: 'Sos Pencicah', name: 'Sos seafood', price: 1.00, img: 'https://via.placeholder.com/150?text=Seafood+Sos' },
-        { id: 10, category: 'Sos Pencicah', name: 'Sos yong tau fu (Sukiyaki)', price: 1.00, img: 'https://via.placeholder.com/150?text=Sukiyaki+Sos' },
+        { id: 7, category: 'Sos Pencicah', name: 'Sos Bagushi original', price: 1.00 },
+        { id: 8, category: 'Sos Pencicah', name: 'Sos Bagushi spicy', price: 1.00 },
+        { id: 9, category: 'Sos Pencicah', name: 'Sos seafood', price: 1.00 },
+        { id: 10, category: 'Sos Pencicah', name: 'Sos yong tau fu (Sukiyaki)', price: 1.00 },
 
-        { id: 11, category: 'Daging', name: 'Daging ribeye', price: 6.00, img: 'https://via.placeholder.com/150?text=Ribeye' },
-        { id: 12, category: 'Daging', name: 'Daging brisket', price: 6.00, img: 'https://via.placeholder.com/150?text=Brisket' },
-        { id: 13, category: 'Daging', name: 'Daging Korea', price: 6.00, img: 'https://via.placeholder.com/150?text=Korea+Beef' },
-        { id: 14, category: 'Daging', name: 'Daging perap', price: 6.00, img: 'https://via.placeholder.com/150?text=Marinated+Beef' },
-        { id: 15, category: 'Daging', name: 'Daging black pepper', price: 6.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Beef' },
+        { id: 11, category: 'Daging', name: 'Daging ribeye', price: 6.00 },
+        { id: 12, category: 'Daging', name: 'Daging brisket', price: 6.00 },
+        { id: 13, category: 'Daging', name: 'Daging Korea', price: 6.00 },
+        { id: 14, category: 'Daging', name: 'Daging perap', price: 6.00 },
+        { id: 15, category: 'Daging', name: 'Daging black pepper', price: 6.00 },
 
-        { id: 16, category: 'Ayam', name: 'Ayam fresh', price: 5.00, img: 'https://via.placeholder.com/150?text=Fresh+Chicken' },
-        { id: 17, category: 'Ayam', name: 'Ayam korea', price: 5.00, img: 'https://via.placeholder.com/150?text=Korea+Chicken' },
-        { id: 18, category: 'Ayam', name: 'Ayam perap', price: 5.00, img: 'https://via.placeholder.com/150?text=Marinated+Chicken' },
-        { id: 19, category: 'Ayam', name: 'Ayam black pepper', price: 5.00, img: 'https://via.placeholder.com/150?text=Black+Pepper+Chicken' },
+        { id: 16, category: 'Ayam', name: 'Ayam fresh', price: 5.00 },
+        { id: 17, category: 'Ayam', name: 'Ayam korea', price: 5.00 },
+        { id: 18, category: 'Ayam', name: 'Ayam perap', price: 5.00 },
+        { id: 19, category: 'Ayam', name: 'Ayam black pepper', price: 5.00 },
 
-        { id: 20, category: 'Seafood', name: 'Lala', price: 4.00, img: 'https://via.placeholder.com/150?text=Lala' },
-        { id: 21, category: 'Seafood', name: 'Udang', price: 6.00, img: 'https://via.placeholder.com/150?text=Prawns' },
-        { id: 22, category: 'Seafood', name: 'Sotong', price: 6.00, img: 'https://via.placeholder.com/150?text=Sotong' },
+        { id: 20, category: 'Seafood', name: 'Lala', price: 4.00 },
+        { id: 21, category: 'Seafood', name: 'Udang', price: 6.00 },
+        { id: 22, category: 'Seafood', name: 'Sotong', price: 6.00 },
 
-        { id: 23, category: 'Bebola & Steamboat', name: 'Telur ayam', price: 1.50, img: 'https://via.placeholder.com/150?text=Egg' },
-        { id: 24, category: 'Bebola & Steamboat', name: 'Tohu telur', price: 3.00, img: 'https://via.placeholder.com/150?text=Tofu' },
-        { id: 25, category: 'Bebola & Steamboat', name: 'Bebola daging', price: 4.00, img: 'https://via.placeholder.com/150?text=Beef+Ball' },
-        { id: 26, category: 'Bebola & Steamboat', name: 'Bebola ikan', price: 4.00, img: 'https://via.placeholder.com/150?text=Fish+Ball' },
-        { id: 27, category: 'Bebola & Steamboat', name: 'Crab stick', price: 4.00, img: 'https://via.placeholder.com/150?text=Crab+Stick' },
-        { id: 28, category: 'Bebola & Steamboat', name: 'Bebola sotong', price: 4.00, img: 'https://via.placeholder.com/150?text=Squid+Ball' },
-        { id: 29, category: 'Bebola & Steamboat', name: 'Tohu ikan', price: 4.00, img: 'https://via.placeholder.com/150?text=Fish+Tofu' },
+        { id: 23, category: 'Bebola & Steamboat', name: 'Telur ayam', price: 1.50 },
+        { id: 24, category: 'Bebola & Steamboat', name: 'Tohu telur', price: 3.00 },
+        { id: 25, category: 'Bebola & Steamboat', name: 'Bebola daging', price: 4.00 },
+        { id: 26, category: 'Bebola & Steamboat', name: 'Bebola ikan', price: 4.00 },
+        { id: 27, category: 'Bebola & Steamboat', name: 'Crab stick', price: 4.00 },
+        { id: 28, category: 'Bebola & Steamboat', name: 'Bebola sotong', price: 4.00 },
+        { id: 29, category: 'Bebola & Steamboat', name: 'Tohu ikan', price: 4.00 },
 
-        { id: 30, category: 'Mee', name: 'Nasi putih', price: 1.50, img: 'https://via.placeholder.com/150?text=White+Rice' },
-        { id: 31, category: 'Mee', name: 'Sohun', price: 2.00, img: 'https://via.placeholder.com/150?text=Sohun' },
-        { id: 32, category: 'Mee', name: 'Mee kuning', price: 2.00, img: 'https://via.placeholder.com/150?text=Yellow+Mee' },
-        { id: 33, category: 'Mee', name: 'Meggi', price: 2.00, img: 'https://via.placeholder.com/150?text=Meggi' },
+        { id: 30, category: 'Mee', name: 'Nasi putih', price: 1.50 },
+        { id: 31, category: 'Mee', name: 'Sohun', price: 2.00 },
+        { id: 32, category: 'Mee', name: 'Mee kuning', price: 2.00 },
+        { id: 33, category: 'Mee', name: 'Meggi', price: 2.00 },
 
-        { id: 34, category: 'Sayur', name: 'Kubis', price: 2.00, img: 'https://via.placeholder.com/150?text=Cabbage' },
-        { id: 35, category: 'Sayur', name: 'Sawi', price: 2.00, img: 'https://via.placeholder.com/150?text=Sawi' },
-        { id: 36, category: 'Sayur', name: 'Karot', price: 2.00, img: 'https://via.placeholder.com/150?text=Carrot' },
-        { id: 37, category: 'Sayur', name: 'Inoki', price: 3.00, img: 'https://via.placeholder.com/150?text=Enoki' },
-        { id: 38, category: 'Sayur', name: 'Chimeji', price: 3.00, img: 'https://via.placeholder.com/150?text=Shimeji' },
+        { id: 34, category: 'Sayur', name: 'Kubis', price: 2.00 },
+        { id: 35, category: 'Sayur', name: 'Sawi', price: 2.00 },
+        { id: 36, category: 'Sayur', name: 'Karot', price: 2.00 },
+        { id: 37, category: 'Sayur', name: 'Inoki', price: 3.00 },
+        { id: 38, category: 'Sayur', name: 'Chimeji', price: 3.00 },
 
-        { id: 39, category: 'Side Dish', name: 'Tepung tin siam', price: 3.00, img: 'https://via.placeholder.com/150?text=Side+Dish' },
-        { id: 40, category: 'Side Dish', name: 'French fries', price: 5.00, img: 'https://via.placeholder.com/150?text=French+Fries' },
-        { id: 41, category: 'Side Dish', name: 'Tembikai', price: 5.00, img: 'https://via.placeholder.com/150?text=Watermelon' },
-        { id: 42, category: 'Side Dish', name: 'Kek pisang', price: 5.00, img: 'https://via.placeholder.com/150?text=Banana+Cake' },
-        { id: 43, category: 'Side Dish', name: 'Nugget', price: 5.00, img: 'https://via.placeholder.com/150?text=Nuggets' },
+        { id: 39, category: 'Side Dish', name: 'Tepung tin siam', price: 3.00 },
+        { id: 40, category: 'Side Dish', name: 'French fries', price: 5.00 },
+        { id: 41, category: 'Side Dish', name: 'Tembikai', price: 5.00 },
+        { id: 42, category: 'Side Dish', name: 'Kek pisang', price: 5.00 },
+        { id: 43, category: 'Side Dish', name: 'Nugget', price: 5.00 },
 
-        { id: 44, category: 'Minuman', name: 'Oren', price: 3.00, img: 'https://via.placeholder.com/150?text=Orange+Drink' },
-        { id: 45, category: 'Minuman', name: 'Teh O ice', price: 3.00, img: 'https://via.placeholder.com/150?text=Teh+O+Ice' },
-        { id: 46, category: 'Minuman', name: 'Sirap', price: 3.00, img: 'https://via.placeholder.com/150?text=Sirap' },
+        { id: 44, category: 'Minuman', name: 'Oren', price: 3.00 },
+        { id: 45, category: 'Minuman', name: 'Teh O ice', price: 3.00 },
+        { id: 46, category: 'Minuman', name: 'Sirap', price: 3.00 },
 
-        { id: 47, category: 'Alacarte Add On', name: 'Set sayur + chedawan', price: 6.00, img: 'https://via.placeholder.com/150?text=Veg+Mushroom+Set' },
-        { id: 48, category: 'Alacarte Add On', name: 'Set mee + telur', price: 6.00, img: 'https://via.placeholder.com/150?text=Mee+Egg+Set' },
-        { id: 49, category: 'Alacarte Add On', name: 'Set bebola', price: 10.00, img: 'https://via.placeholder.com/150?text=Meatball+Set' },
-        { id: 50, category: 'Alacarte Add On', name: 'Set sayur + bb + mee + telur', price: 10.00, img: 'https://via.placeholder.com/150?text=Combo+Set' },
-        { id: 51, category: 'Alacarte Add On', name: 'Set seafood + ayam', price: 12.00, img: 'https://via.placeholder.com/150?text=Seafood+Chicken+Set' },
+        { id: 47, category: 'Alacarte Add On', name: 'Set sayur + chedawan', price: 6.00 },
+        { id: 48, category: 'Alacarte Add On', name: 'Set mee + telur', price: 6.00 },
+        { id: 49, category: 'Alacarte Add On', name: 'Set bebola', price: 10.00 },
+        { id: 50, category: 'Alacarte Add On', name: 'Set sayur + bb + mee + telur', price: 10.00 },
+        { id: 51, category: 'Alacarte Add On', name: 'Set seafood + ayam', price: 12.00 },
 
-        { id: 52, category: 'Set Menu', name: 'Set Solo (1 Orang)', price: 25.00, img: 'https://via.placeholder.com/150?text=Set+Solo' },
-        { id: 53, category: 'Set Menu', name: 'Set Couple (2 Orang)', price: 45.00, img: 'https://via.placeholder.com/150?text=Set+Couple' },
-        { id: 54, category: 'Set Menu', name: 'Set Family (3-4 Orang)', price: 75.00, img: 'https://via.placeholder.com/150?text=Set+Family' }
+        {
+            id: 52,
+            category: 'Set Menu',
+            name: 'Set Solo (1 Orang)',
+            price: 25.00,
+            includes: [
+                'Daging slice',
+                'Set seafood',
+                'Set sayur & mee',
+                'Sos bagushi'
+            ]
+        },
+        {
+            id: 53,
+            category: 'Set Menu',
+            name: 'Set Couple (2 Orang)',
+            price: 45.00,
+            includes: [
+                'Daging slice (3)',
+                'Set sayur & mee',
+                'Set seafood',
+                'Nasi putih (2)',
+                'Sos bagushi (2)'
+            ]
+        },
+        {
+            id: 54,
+            category: 'Set Menu',
+            name: 'Set Family (3-4 Orang)',
+            price: 75.00,
+            includes: [
+                'Daging slice (6)',
+                'Set seafood',
+                'Set bebola',
+                'Set sayur',
+                'Set mee',
+                'Sos bagushi (3)',
+                'Nasi putih (2)'
+            ]
+        }
     ];
+
+    // Auto-assign gambar mengikut id item (contoh: id 52 -> 52.jpg)
+    const menuItems = rawMenuItems.map(item => ({
+        ...item,
+        img: `${item.id}.jpg`
+    }));
 
     let cart = [];
     let currentDetailItem = null;
@@ -792,12 +864,31 @@
     }
 
     function openProductDetail(name, price, img, category) {
+        const matchedItem = menuItems.find(item => item.name === name);
         currentDetailItem = { name: name, price: price, img: img };
+
         document.getElementById('detailName').innerText = name;
         document.getElementById('detailPrice').innerText = 'Price: RM ' + price.toFixed(2);
         document.getElementById('detailCategory').innerText = 'Category: ' + category;
-        document.getElementById('detailImg').src = img;
+        const detailImgEl = document.getElementById('detailImg');
+        detailImgEl.onerror = function() {
+            this.onerror = null;
+            this.src = 'bagushi.jpg.png';
+        };
+        detailImgEl.src = img;
         document.getElementById('specialRequest').value = '';
+
+        const setBox = document.getElementById('setIncludesContainer');
+        const setList = document.getElementById('setIncludesList');
+
+        if (matchedItem && Array.isArray(matchedItem.includes) && matchedItem.includes.length > 0) {
+            setList.innerHTML = matchedItem.includes.map(food => `<li>${food}</li>`).join('');
+            setBox.style.display = 'block';
+        } else {
+            setList.innerHTML = '';
+            setBox.style.display = 'none';
+        }
+
         goToPage(6);
     }
 
@@ -833,7 +924,7 @@
 
             const itemHTML = `
                 <div class="cart-item-box">
-                    <img src="${item.img}" alt="${item.name}">
+                    <img src="${item.img}" alt="${item.name}" onerror="this.onerror=null;this.src='bagushi.jpg.png';">
                     <div style="flex:1;">
                         <p style="font-weight: bold; font-size: 0.95rem; margin-bottom: 2px;">${item.name}</p>
                         <small style="color:#666; display:block; margin-bottom:5px;">RM ${itemTotal.toFixed(2)}</small>
