@@ -40,7 +40,7 @@
             flex-direction: column;
             width: 100%;
             height: 100%;
-            padding: 20px;
+            padding: 22px 20px;
             overflow-y: auto;
             position: absolute;
             top: 0;
@@ -58,7 +58,7 @@
             justify-content: space-between;
             align-items: center;
             padding-bottom: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .top-bar i {
@@ -77,6 +77,53 @@
             padding: 2px 6px;
             font-size: 0.7rem;
             font-weight: bold;
+        }
+
+        /* Wireframe-matched Welcome Hero & Button */
+        .welcome-hero-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            background-color: #e2e2e2;
+        }
+
+        .welcome-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            line-height: 1.25;
+            text-align: center;
+            color: #1f1f1f;
+            letter-spacing: 0.3px;
+            margin-bottom: 14px;
+        }
+
+        .welcome-sub {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #1f1f1f;
+            margin-bottom: 24px;
+        }
+
+        .btn-start-ordering {
+            background-color: #3f3f3f;
+            color: #ffffff;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 28px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+            margin-top: auto;
+            font-size: 1.05rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-start-ordering:hover {
+            background-color: #222222;
         }
 
         .img-header {
@@ -332,23 +379,23 @@
 
 <div class="app-screen">
 
-    <!-- PAGE 1: Welcome Screen -->
+    <!-- PAGE 1: Welcome Screen (Wireframe Layout) -->
     <div id="page1" class="page active">
         <div class="top-bar">
-            <i class="fa-solid fa-bars"></i>
-            <div>
-                <i class="fa-regular fa-bell"></i> &nbsp;
-                <i class="fa-solid fa-share-nodes"></i> &nbsp;
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-bars" onclick="goToPage(3)"></i>
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <i class="fa-regular fa-bell" onclick="goToPage(8)"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+                <i class="fa-solid fa-magnifying-glass" onclick="goToPage(4)"></i>
             </div>
         </div>
-        
-        <img src="bagushi.jpg.png" class="img-header" alt="Bagushi Steamboat & Grill Logo">
 
-        <h1 class="title-large" style="font-size: 1.4rem; line-height: 1.2; margin-bottom: 10px; text-align: center;">BAGUSHI STEAMBOAT & GRILL CHANGLUN</h1>
-        <p style="text-align: center; font-size: 1.6rem; font-weight: bold; margin-bottom: 30px;">Welcome!</p>
-        
-        <button class="btn-primary" onclick="goToPage(3)">Start Ordering</button>
+        <img src="bagushi.jpg.png" class="welcome-hero-img" alt="Bagushi Steamboat & Grill Changlun">
+
+        <h1 class="welcome-title">BAGUSHI STEAMBOAT &amp; GRILL<br>CHANGLUN</h1>
+        <p class="welcome-sub">Welcome!</p>
+
+        <button class="btn-start-ordering" onclick="goToPage(3)">Start Ordering</button>
     </div>
 
     <!-- PAGE 3: Confirm Table Number -->
@@ -361,12 +408,12 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        
+
         <img src="bagushi.jpg.png" class="img-header" alt="Bagushi Steamboat & Grill">
 
         <h2 class="title-large" style="font-size: 1.3rem; margin-bottom: 5px; text-align: center;">Confirm Your Table</h2>
         <p class="subtitle" style="font-size: 0.85rem; margin-bottom: 20px; text-align: center;">Your table number has been detected from the QR code</p>
-        
+
         <div style="background: #fff; border: 1.5px solid #222; border-radius: 15px; padding: 15px; text-align: center; margin-bottom: 15px;">
             <label style="font-size: 0.9rem; font-weight: bold; display: block; margin-bottom: 8px;">Table Number</label>
             <select id="selectMeja" class="form-input" style="text-align: center; margin-bottom: 0;">
@@ -377,7 +424,7 @@
                 <option value="Table 12">Table 12</option>
             </select>
         </div>
-        
+
         <p style="text-align: center; font-size: 0.75rem; color: #666; margin-bottom: 20px;">Tap the arrow if the detected table number is incorrect</p>
 
         <button class="btn-primary" onclick="confirmTable()">Confirm</button>
@@ -392,7 +439,7 @@
             </i>
         </div>
         <input type="text" id="searchMenuInput" class="form-input" placeholder="🔍 Search all 54 items..." oninput="filterMenu(this.value)">
-        
+
         <div id="searchResults" style="display: none; margin-bottom: 15px;">
             <p style="font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; color:#d9534f;">Search Results:</p>
             <div id="searchResultList" style="display: flex; flex-direction: column; gap: 8px;"></div>
@@ -424,7 +471,7 @@
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Bebola & Steamboat')">
                     <i class="fa-solid fa-circle-dot"></i>
-                    <span>Bebola & Steamboat</span>
+                    <span>Bebola &amp; Steamboat</span>
                 </div>
                 <div class="cat-card" onclick="filterByCategory('Mee')">
                     <i class="fa-solid fa-bowl-food"></i>
@@ -751,7 +798,6 @@
         }
     ];
 
-    // Auto-assign gambar mengikut id item (contoh: id 52 -> 52.jpg)
     const menuItems = rawMenuItems.map(item => ({
         ...item,
         img: `${item.id}.jpg`
@@ -819,7 +865,7 @@
         const searchResultsBox = document.getElementById('searchResults');
         const searchResultList = document.getElementById('searchResultList');
         const defaultCategories = document.getElementById('defaultCategories');
-        
+
         searchResultList.innerHTML = '';
         const keyword = query.toLowerCase().trim();
 
