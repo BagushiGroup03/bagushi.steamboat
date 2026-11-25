@@ -433,7 +433,10 @@
     <!-- PAGE 4: Menu Categories Selection with Icons -->
     <div id="page4" class="page">
         <div class="top-bar">
-            <span style="font-size:0.8rem; color:#666;">Menu Categories</span>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <i class="fa-solid fa-chevron-left" onclick="goToPage(3)" title="Back to Table Confirmation"></i>
+                <span style="font-size:0.85rem; font-weight:600; color:#444;">Menu Categories</span>
+            </div>
             <i class="fa-solid fa-cart-shopping" onclick="goToPage(7)" style="font-size:1.3rem; position:relative;">
                 <span class="cart-badge total-cart-count">0</span>
             </i>
